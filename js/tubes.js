@@ -411,9 +411,8 @@ function setmode(newmode){
         key_right = 0;
         key_speedminus = 0;
         key_speedplus = 0;
-        p = 10;
+        speed = 10;
         rotation = 0;
-
 
         get('page').innerHTML = '<canvas id=canvas></canvas>';
 
@@ -492,7 +491,7 @@ var y = 0;
 
 setmode(0);
 
-window.onkeydown=function(e){
+window.onkeydown = function(e){
     if(mode > 0){
         i = window.event ? event : e;
         i = i.charCode ? i.charCode : i.keyCode;
