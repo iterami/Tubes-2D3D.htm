@@ -13,7 +13,7 @@ function draw(){
         speed += 1;
     }
 
-    var temp_blink_fix = 0;
+    var no_blink_fix = 1;
     do_split = 0;
 
     /* move wall split location */
@@ -25,7 +25,7 @@ function draw(){
         /* check if wall split reached edge of screen */
         if(wall_splits[i * 2] < -x || wall_splits[i * 2] > x){
             /* this temporary variable prevents blinking bug */
-            temp_blink_fix = 1;
+            no_blink_fix = 0;
 
             /* reset wall splits */
             wall_splits[i * 2] = [
@@ -69,217 +69,7 @@ function draw(){
     buffer.rotate(rotation * (Math.PI / 180));
 
     /* draw walls */
-    if(temp_blink_fix){
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[0],
-            wall_splits[1]
-        );
-        buffer.lineTo(
-            wall_splits[2],
-            wall_splits[3]
-        );
-        buffer.lineTo(
-            x,
-            -x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[0][0];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[0],
-            wall_splits[1]
-        );
-        buffer.lineTo(
-            wall_splits[4],
-            wall_splits[5]
-        );
-        buffer.lineTo(
-            -x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[0][1];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[2],
-            wall_splits[3]
-        );
-        buffer.lineTo(
-            wall_splits[6],
-            wall_splits[7]
-        );
-        buffer.lineTo(
-            x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[0][2];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            x
-        );
-        buffer.lineTo(
-            wall_splits[4],
-            wall_splits[5]
-        );
-        buffer.lineTo(
-            wall_splits[6],
-            wall_splits[7]
-        );
-        buffer.lineTo(
-            x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[0][3];
-        buffer.fill();
-
-        i = 3;
-        do{
-            buffer.beginPath();
-            buffer.moveTo(
-                0,
-                0
-            );
-            buffer.lineTo(
-                wall_splits[[0,0,2,4][i]],
-                wall_splits[[1,1,3,5][i]]
-            );
-            buffer.lineTo(
-                wall_splits[[2,4,6,6][i]],
-                wall_splits[[3,5,7,7][i]]
-            );
-            buffer.closePath();
-            buffer.fillStyle = colors[1][i];
-            buffer.fill();
-        }while(i--);
-
-    }else{
-        i = 3;
-        do{
-            buffer.beginPath();
-            buffer.moveTo(
-                0,
-                0
-            );
-            buffer.lineTo(
-                wall_splits[[0,0,2,4][i]],
-                wall_splits[[1,1,3,5][i]]
-            );
-            buffer.lineTo(
-                wall_splits[[2,4,6,6][i]],
-                wall_splits[[3,5,7,7][i]]
-            );
-            buffer.closePath();
-            buffer.fillStyle = colors[0][i];
-            buffer.fill();
-        }while(i--);
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[0],
-            wall_splits[1]
-        );
-        buffer.lineTo(
-            wall_splits[2],
-            wall_splits[3]
-        );
-        buffer.lineTo(
-            x,
-            -x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[1][0];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[0],
-            wall_splits[1]
-        );
-        buffer.lineTo(
-            wall_splits[4],
-            wall_splits[5]
-        );
-        buffer.lineTo(
-            -x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[1][1];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            x,
-            -x
-        );
-        buffer.lineTo(
-            wall_splits[2],
-            wall_splits[3]
-        );
-        buffer.lineTo(
-            wall_splits[6],
-            wall_splits[7]
-        );
-        buffer.lineTo(
-            x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[1][2];
-        buffer.fill();
-
-        buffer.beginPath();
-        buffer.moveTo(
-            -x,
-            x
-        );
-        buffer.lineTo(
-            wall_splits[4],
-            wall_splits[5]
-        );
-        buffer.lineTo(
-            wall_splits[6],
-            wall_splits[7]
-        );
-        buffer.lineTo(
-            x,
-            x
-        );
-        buffer.closePath();
-        buffer.fillStyle = colors[1][3];
-        buffer.fill();
-    }
+    draw_walls(no_blink_fix);
 
     if(do_split){
         colors[1] = colors[0];
@@ -324,6 +114,136 @@ function draw(){
     );
 }
 
+function draw_walls(no_blink_fix){
+    if(no_blink_fix){
+        i = 3;
+        do{
+            buffer.beginPath();
+            buffer.moveTo(
+                0,
+                0
+            );
+            buffer.lineTo(
+                wall_splits[[0,0,2,4][i]],
+                wall_splits[[1,1,3,5][i]]
+            );
+            buffer.lineTo(
+                wall_splits[[2,4,6,6][i]],
+                wall_splits[[3,5,7,7][i]]
+            );
+            buffer.closePath();
+            buffer.fillStyle = colors[0][i];
+            buffer.fill();
+        }while(i--);
+    }
+
+    buffer.beginPath();
+    buffer.moveTo(
+        -x,
+        -x
+    );
+    buffer.lineTo(
+        wall_splits[0],
+        wall_splits[1]
+    );
+    buffer.lineTo(
+        wall_splits[2],
+        wall_splits[3]
+    );
+    buffer.lineTo(
+        x,
+        -x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[no_blink_fix][0];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+        -x,
+        -x
+    );
+    buffer.lineTo(
+        wall_splits[0],
+        wall_splits[1]
+    );
+    buffer.lineTo(
+        wall_splits[4],
+        wall_splits[5]
+    );
+    buffer.lineTo(
+        -x,
+        x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[no_blink_fix][1];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+        x,
+        -x
+    );
+    buffer.lineTo(
+        wall_splits[2],
+        wall_splits[3]
+    );
+    buffer.lineTo(
+        wall_splits[6],
+        wall_splits[7]
+    );
+    buffer.lineTo(
+        x,
+        x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[no_blink_fix][2];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+        -x,
+        x
+    );
+    buffer.lineTo(
+        wall_splits[4],
+        wall_splits[5]
+    );
+    buffer.lineTo(
+        wall_splits[6],
+        wall_splits[7]
+    );
+    buffer.lineTo(
+        x,
+        x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[no_blink_fix][3];
+    buffer.fill();
+
+    if(!no_blink_fix){
+        i = 3;
+        do{
+            buffer.beginPath();
+            buffer.moveTo(
+                0,
+                0
+            );
+            buffer.lineTo(
+                wall_splits[[0,0,2,4][i]],
+                wall_splits[[1,1,3,5][i]]
+            );
+            buffer.lineTo(
+                wall_splits[[2,4,6,6][i]],
+                wall_splits[[3,5,7,7][i]]
+            );
+            buffer.closePath();
+            buffer.fillStyle = colors[1][i];
+            buffer.fill();
+        }while(i--);
+    }
+}
+
 function get(i){
     return document.getElementById(i);
 }
@@ -334,8 +254,13 @@ function random_hex(){
 
 function resize(){
     if(mode > 0){
-        width = get('buffer').width = get('canvas').width = window.innerWidth;
-        height = get('buffer').height = get('canvas').height = window.innerHeight;
+        width = window.innerWidth;
+        get('buffer').width = width;
+        get('canvas').width = width;
+
+        height = window.innerHeight;
+        get('buffer').height = height;
+        get('canvas').height = height;
 
         x = width / 2;
         y = height / 2;
@@ -452,7 +377,7 @@ function setmode(newmode){
             + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
             + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=1 type=text value='
-            + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>'
+            + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>';
     }
 }
 
