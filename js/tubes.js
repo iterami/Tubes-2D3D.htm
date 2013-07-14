@@ -16,18 +16,18 @@ function draw(){
     var no_blink_fix = 1;
     do_split = 0;
 
-    /* move wall split location */
+    // move wall split location
     i = 3;
     do{
         wall_splits[i * 2] += wall_splits[i * 2] >= 0 ? speed : -speed;
         wall_splits[i * 2 + 1] += wall_splits[i * 2 + 1] >= 0 ? speed : -speed;
 
-        /* check if wall split reached edge of screen */
+        // check if wall split reached edge of screen
         if(wall_splits[i * 2] < -x || wall_splits[i * 2] > x){
-            /* this temporary variable prevents blinking bug */
+            // this temporary variable prevents blinking bug
             no_blink_fix = 0;
 
-            /* reset wall splits */
+            // reset wall splits
             wall_splits[i * 2] = [
                 -2,
                 -2,
@@ -53,7 +53,7 @@ function draw(){
         }
     }while(i--);
 
-    if(settings[5]){/* clear? */
+    if(settings[5]){// clear?
         buffer.clearRect(
             0,
             0,
@@ -68,7 +68,7 @@ function draw(){
     );
     buffer.rotate(rotation * (Math.PI / 180));
 
-    /* draw walls */
+    // draw walls
     draw_walls(no_blink_fix);
 
     if(do_split){
@@ -81,14 +81,14 @@ function draw(){
         ];
     }
 
-    /* undo rotate/translate */
+    // undo rotate/translate
     buffer.rotate(-rotation * (Math.PI / 180));
     buffer.translate(
         -x,
         -y
     );
 
-    /* draw current speed */
+    // draw current speed
     buffer.font = '23pt sans-serif';
     buffer.textAlign = 'left';
     buffer.textBaseline = 'top';
@@ -99,7 +99,7 @@ function draw(){
         5
     );
 
-    if(settings[5]){/* clear? */
+    if(settings[5]){// clear?
         canvas.clearRect(
             0,
             0,
@@ -328,7 +328,7 @@ function setmode(newmode){
 
     mode = newmode;
 
-    /* new game mode */
+    // new game mode
     if(mode > 0){
         save();
 
@@ -346,7 +346,6 @@ function setmode(newmode){
 
         resize();
 
-        /**/
         wall_splits = [
             -2,
             -2,
@@ -358,25 +357,25 @@ function setmode(newmode){
              2
         ];
 
-        /* set initial tube colors */
+        // set initial tube colors
         colors = [
-            ['#f0f', '#06f', '#ff0', '#f60'],/* initial */
-            ['#0f0', '#f00', '#00f', '#0ff']/* first swap */
+            ['#f0f', '#06f', '#ff0', '#f60'],// initial
+            ['#0f0', '#f00', '#00f', '#0ff']// first swap
         ];
 
-        interval = setInterval('draw()', settings[1]);/* milliseconds per frame */
+        interval = setInterval('draw()', settings[1]);// milliseconds per frame
 
-    /* main menu mode */
+    // main menu mode
     }else{
         buffer = 0;
         canvas = 0;
 
-        get('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a href=/><b>Tubes</b></a></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><a onclick=setmode(1)>Make Mama Sick</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled size=3 style=border:0 type=text value=ESC>Main Menu<br><input id=movement-keys maxlength=2 size=3 type=text value='
-            + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 size=3 type=text value='
-            + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 size=3 type=text value='
+        get('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a href=/><b>Tubes</b></a></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><a onclick=setmode(1)>Make Mama Sick</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled size=3 style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 size=3 value='
+            + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 size=3 value='
+            + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 size=3 value='
             + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
-            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=1 type=text value='
+            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=1 value='
             + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>';
     }
 }
@@ -401,12 +400,12 @@ var px = 0;
 var py = 0;
 var rotation = 0;
 var settings = [
-    ls.getItem('tubes-0') === null ?    1 : parseFloat(ls.getItem('tubes-0')),/* audio volume */
-    ls.getItem('tubes-1') === null ?   30 : parseInt(ls.getItem('tubes-1')),/* milliseconds per frame */
-    ls.getItem('tubes-2') === null ? 'AD' : ls.getItem('tubes-2'),/* movement keys */
-    ls.getItem('tubes-3') === null ?  'S' : ls.getItem('tubes-3'),/* slowdown key */
-    ls.getItem('tubes-4') === null ?  'W' : ls.getItem('tubes-4'),/* speedup key */
-    ls.getItem('tubes-5') === null/* clear? */
+    ls.getItem('tubes-0') === null ?    1 : parseFloat(ls.getItem('tubes-0')),// audio volume
+    ls.getItem('tubes-1') === null ?   30 : parseInt(ls.getItem('tubes-1')),// milliseconds per frame
+    ls.getItem('tubes-2') === null ? 'AD' : ls.getItem('tubes-2'),// movement keys
+    ls.getItem('tubes-3') === null ?  'S' : ls.getItem('tubes-3'),// slowdown key
+    ls.getItem('tubes-4') === null ?  'W' : ls.getItem('tubes-4'),// speedup key
+    ls.getItem('tubes-5') === null// clear?
 ];
 var speed = 0;
 var wall_splits = [];
@@ -433,7 +432,7 @@ window.onkeydown = function(e){
         }else if(String.fromCharCode(i) === settings[4]){
             key_speedplus = 1;
 
-        }else if(i === 27){/* ESC */
+        }else if(i === 27){// ESC
             setmode(0);
         }
     }
