@@ -375,7 +375,7 @@ function setmode(newmode){
             + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 size=3 value='
             + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
-            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=1 value='
+            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=3 value='
             + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>';
     }
 }
