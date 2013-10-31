@@ -370,12 +370,12 @@ function setmode(newmode){
         buffer = 0;
         canvas = 0;
 
-        get('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled size=3 style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 size=3 value='
-            + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 size=3 value='
-            + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 size=3 value='
+        get('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+            + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
+            + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
             + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
-            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame size=3 value='
+            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame value='
             + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>';
     }
 }
