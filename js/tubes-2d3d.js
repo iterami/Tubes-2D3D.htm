@@ -108,7 +108,7 @@ function draw(){
         );
     }
     canvas.drawImage(
-        get('buffer'),
+        document.getElementById('buffer'),
         0,
         0
     );
@@ -244,23 +244,31 @@ function draw_walls(no_blink_fix){
     }
 }
 
-function get(i){
-    return document.getElementById(i);
-}
-
 function random_hex(){
     return '0123456789abcdef'.charAt(Math.floor(Math.random() * 16));
+}
+
+function reset(){
+    if(confirm('Reset settings?')){
+        document.getElementById('audio-volume').value = 1;
+        document.getElementById('clear').checked = 1;
+        document.getElementById('key-slowdown').value = 'S';
+        document.getElementById('key-speedup').value = 'W';
+        document.getElementById('movement-keys').value = 'AD';
+        document.getElementById('ms-per-frame').value = 30;
+        save();
+    }
 }
 
 function resize(){
     if(mode > 0){
         width = window.innerWidth;
-        get('buffer').width = width;
-        get('canvas').width = width;
+        document.getElementById('buffer').width = width;
+        document.getElementById('canvas').width = width;
 
         height = window.innerHeight;
-        get('buffer').height = height;
-        get('canvas').height = height;
+        document.getElementById('buffer').height = height;
+        document.getElementById('canvas').height = height;
 
         x = width / 2;
         y = height / 2;
@@ -275,16 +283,16 @@ function save(){
             'ms-per-frame'
         ][i];
 
-        if(get(j).value == [1, 30][i] || isNaN(get(j).value) || get(j).value < [0, 1][i]){
+        if(document.getElementById(j).value == [1, 30][i] || isNaN(document.getElementById(j).value) || document.getElementById(j).value < [0, 1][i]){
             ls.removeItem('tubes-' + i);
             settings[i] = [
                 1,
                 30
             ][i];
-            get(j).value = settings[i];
+            document.getElementById(j).value = settings[i];
 
         }else{
-            settings[i] = parseFloat(get(j).value);
+            settings[i] = parseFloat(document.getElementById(j).value);
             ls.setItem(
                 'tubes-' + i,
                 settings[i]
@@ -294,7 +302,7 @@ function save(){
 
     i = 2;
     do{
-        if(get(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value == ['AD', 'S', 'W'][i]){
+        if(document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value == ['AD', 'S', 'W'][i]){
             ls.removeItem('tubes-' + (i + 2));
             settings[i + 2] = [
                 'AD',
@@ -303,7 +311,7 @@ function save(){
             ][i];
 
         }else{
-            settings[i + 2] = get(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value;
+            settings[i + 2] = document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value;
             ls.setItem(
                 'tubes-' + (i + 2),
                 settings[i + 2]
@@ -311,7 +319,7 @@ function save(){
         }
     }while(i--);
 
-    settings[5] = get('clear').checked;
+    settings[5] = document.getElementById('clear').checked;
     if(settings[5]){
         ls.removeItem('tubes-5');
 
@@ -339,10 +347,10 @@ function setmode(newmode){
         speed = 10;
         rotation = 0;
 
-        get('page').innerHTML = '<canvas id=canvas></canvas>';
+        document.getElementById('page').innerHTML = '<canvas id=canvas></canvas>';
 
-        buffer = get('buffer').getContext('2d');
-        canvas = get('canvas').getContext('2d');
+        buffer = document.getElementById('buffer').getContext('2d');
+        canvas = document.getElementById('canvas').getContext('2d');
 
         resize();
 
@@ -370,13 +378,13 @@ function setmode(newmode){
         buffer = 0;
         canvas = 0;
 
-        get('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
             + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
             + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
             + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
             + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame value='
-            + settings[1] + '>ms/Frame<br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'movement-keys\').value=\'AD\';get(\'key-slowdown\').value=\'S\';get(\'key-speedup\').value=\'W\';get(\'ms-per-frame\').value=30;save();setmode(0)}">Reset Settings</a></div></div>';
+            + settings[1] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
     }
 }
 
