@@ -29,24 +29,24 @@ function draw(){
 
             // reset wall splits
             wall_splits[i * 2] = [
-                -2,
-                -2,
-                 2,
-                -2,
-                -2,
-                 2,
-                 2,
-                 2
+              -2,
+              -2,
+               2,
+              -2,
+              -2,
+               2,
+               2,
+               2
             ][i * 2];
             wall_splits[i * 2 + 1] = [
-                -2,
-                -2,
-                 2,
-                -2,
-                -2,
-                 2,
-                 2,
-                 2
+              -2,
+              -2,
+               2,
+              -2,
+              -2,
+               2,
+               2,
+               2
             ][i * 2 + 1];
 
             do_split = 1;
@@ -55,16 +55,16 @@ function draw(){
 
     if(settings[5]){// clear?
         buffer.clearRect(
-            0,
-            0,
-            width,
-            height
+          0,
+          0,
+          width,
+          height
         );
     }
 
     buffer.translate(
-        x,
-        y
+      x,
+      y
     );
     buffer.rotate(rotation * (Math.PI / 180));
 
@@ -74,18 +74,18 @@ function draw(){
     if(do_split){
         colors[1] = colors[0];
         colors[0] = [
-            '#' + random_hex() + random_hex() + random_hex(),
-            '#' + random_hex() + random_hex() + random_hex(),
-            '#' + random_hex() + random_hex() + random_hex(),
-            '#' + random_hex() + random_hex() + random_hex()
+          '#' + random_hex() + random_hex() + random_hex(),
+          '#' + random_hex() + random_hex() + random_hex(),
+          '#' + random_hex() + random_hex() + random_hex(),
+          '#' + random_hex() + random_hex() + random_hex()
         ];
     }
 
     // undo rotate/translate
     buffer.rotate(-rotation * (Math.PI / 180));
     buffer.translate(
-        -x,
-        -y
+      -x,
+      -y
     );
 
     // draw current speed
@@ -94,23 +94,23 @@ function draw(){
     buffer.textBaseline = 'top';
     buffer.fillStyle = '#fff';
     buffer.fillText(
-        speed + ' m/s',
-        5,
-        5
+      speed + ' m/s',
+      5,
+      5
     );
 
     if(settings[5]){// clear?
         canvas.clearRect(
-            0,
-            0,
-            width,
-            height
+          0,
+          0,
+          width,
+          height
         );
     }
     canvas.drawImage(
-        document.getElementById('buffer'),
-        0,
-        0
+      document.getElementById('buffer'),
+      0,
+      0
     );
 }
 
@@ -120,16 +120,16 @@ function draw_walls(no_blink_fix){
         do{
             buffer.beginPath();
             buffer.moveTo(
-                0,
-                0
+              0,
+              0
             );
             buffer.lineTo(
-                wall_splits[[0,0,2,4][i]],
-                wall_splits[[1,1,3,5][i]]
+              wall_splits[[0,0,2,4][i]],
+              wall_splits[[1,1,3,5][i]]
             );
             buffer.lineTo(
-                wall_splits[[2,4,6,6][i]],
-                wall_splits[[3,5,7,7][i]]
+              wall_splits[[2,4,6,6][i]],
+              wall_splits[[3,5,7,7][i]]
             );
             buffer.closePath();
             buffer.fillStyle = colors[0][i];
@@ -139,20 +139,20 @@ function draw_walls(no_blink_fix){
 
     buffer.beginPath();
     buffer.moveTo(
-        -x,
-        -x
+      -x,
+      -x
     );
     buffer.lineTo(
-        wall_splits[0],
-        wall_splits[1]
+      wall_splits[0],
+      wall_splits[1]
     );
     buffer.lineTo(
-        wall_splits[2],
-        wall_splits[3]
+      wall_splits[2],
+      wall_splits[3]
     );
     buffer.lineTo(
-        x,
-        -x
+      x,
+      -x
     );
     buffer.closePath();
     buffer.fillStyle = colors[no_blink_fix][0];
@@ -160,20 +160,20 @@ function draw_walls(no_blink_fix){
 
     buffer.beginPath();
     buffer.moveTo(
-        -x,
-        -x
+      -x,
+      -x
     );
     buffer.lineTo(
-        wall_splits[0],
-        wall_splits[1]
+      wall_splits[0],
+      wall_splits[1]
     );
     buffer.lineTo(
-        wall_splits[4],
-        wall_splits[5]
+      wall_splits[4],
+      wall_splits[5]
     );
     buffer.lineTo(
-        -x,
-        x
+      -x,
+      x
     );
     buffer.closePath();
     buffer.fillStyle = colors[no_blink_fix][1];
@@ -181,20 +181,20 @@ function draw_walls(no_blink_fix){
 
     buffer.beginPath();
     buffer.moveTo(
-        x,
-        -x
+      x,
+      -x
     );
     buffer.lineTo(
-        wall_splits[2],
-        wall_splits[3]
+      wall_splits[2],
+      wall_splits[3]
     );
     buffer.lineTo(
-        wall_splits[6],
-        wall_splits[7]
+      wall_splits[6],
+      wall_splits[7]
     );
     buffer.lineTo(
-        x,
-        x
+      x,
+      x
     );
     buffer.closePath();
     buffer.fillStyle = colors[no_blink_fix][2];
@@ -202,20 +202,20 @@ function draw_walls(no_blink_fix){
 
     buffer.beginPath();
     buffer.moveTo(
-        -x,
-        x
+      -x,
+      x
     );
     buffer.lineTo(
-        wall_splits[4],
-        wall_splits[5]
+      wall_splits[4],
+      wall_splits[5]
     );
     buffer.lineTo(
-        wall_splits[6],
-        wall_splits[7]
+      wall_splits[6],
+      wall_splits[7]
     );
     buffer.lineTo(
-        x,
-        x
+      x,
+      x
     );
     buffer.closePath();
     buffer.fillStyle = colors[no_blink_fix][3];
@@ -226,16 +226,16 @@ function draw_walls(no_blink_fix){
         do{
             buffer.beginPath();
             buffer.moveTo(
-                0,
-                0
+              0,
+              0
             );
             buffer.lineTo(
-                wall_splits[[0,0,2,4][i]],
-                wall_splits[[1,1,3,5][i]]
+              wall_splits[[0,0,2,4][i]],
+              wall_splits[[1,1,3,5][i]]
             );
             buffer.lineTo(
-                wall_splits[[2,4,6,6][i]],
-                wall_splits[[3,5,7,7][i]]
+              wall_splits[[2,4,6,6][i]],
+              wall_splits[[3,5,7,7][i]]
             );
             buffer.closePath();
             buffer.fillStyle = colors[1][i];
@@ -279,23 +279,23 @@ function save(){
     i = 1;
     do{
         j = [
-            'audio-volume',
-            'ms-per-frame'
+          'audio-volume',
+          'ms-per-frame'
         ][i];
 
         if(document.getElementById(j).value == [1, 30][i] || isNaN(document.getElementById(j).value) || document.getElementById(j).value < [0, 1][i]){
-            ls.removeItem('tubes-' + i);
+            window.localStorage.removeItem('tubes-' + i);
             settings[i] = [
-                1,
-                30
+              1,
+              30
             ][i];
             document.getElementById(j).value = settings[i];
 
         }else{
             settings[i] = parseFloat(document.getElementById(j).value);
-            ls.setItem(
-                'tubes-' + i,
-                settings[i]
+            window.localStorage.setItem(
+              'tubes-' + i,
+              settings[i]
             );
         }
     }while(i--);
@@ -303,30 +303,30 @@ function save(){
     i = 2;
     do{
         if(document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value == ['AD', 'S', 'W'][i]){
-            ls.removeItem('tubes-' + (i + 2));
+            window.localStorage.removeItem('tubes-' + (i + 2));
             settings[i + 2] = [
-                'AD',
-                'S',
-                'W'
+              'AD',
+              'S',
+              'W'
             ][i];
 
         }else{
             settings[i + 2] = document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value;
-            ls.setItem(
-                'tubes-' + (i + 2),
-                settings[i + 2]
+            window.localStorage.setItem(
+              'tubes-' + (i + 2),
+              settings[i + 2]
             );
         }
     }while(i--);
 
     settings[5] = document.getElementById('clear').checked;
     if(settings[5]){
-        ls.removeItem('tubes-5');
+        window.localStorage.removeItem('tubes-5');
 
     }else{
-        ls.setItem(
-            'tubes-5',
-            0
+        window.localStorage.setItem(
+          'tubes-5',
+          0
         );
     }
 }
@@ -355,20 +355,20 @@ function setmode(newmode){
         resize();
 
         wall_splits = [
-            -2,
-            -2,
-             2,
-            -2,
-            -2,
-             2,
-             2,
-             2
+          -2,
+          -2,
+           2,
+          -2,
+          -2,
+           2,
+           2,
+           2
         ];
 
         // set initial tube colors
         colors = [
-            ['#f0f', '#06f', '#ff0', '#f60'],// initial
-            ['#0f0', '#f00', '#00f', '#0ff']// first swap
+          ['#f0f', '#06f', '#ff0', '#f60'],// initial
+          ['#0f0', '#f00', '#00f', '#0ff']// first swap
         ];
 
         interval = setInterval('draw()', settings[1]);// milliseconds per frame
@@ -379,12 +379,12 @@ function setmode(newmode){
         canvas = 0;
 
         document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
-            + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
-            + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
-            + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
-            + settings[0] + '>Audio<br><label><input '
-            + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame value='
-            + settings[1] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
+          + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
+          + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
+          + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
+          + settings[0] + '>Audio<br><label><input '
+          + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame value='
+          + settings[1] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
     }
 }
 
@@ -400,7 +400,6 @@ var key_left = 0;
 var key_right = 0;
 var key_speedminus = 0;
 var key_speedplus = 0;
-var ls = window.localStorage;
 var mode = 0;
 var mx = 0;
 var my = 0;
@@ -408,12 +407,22 @@ var px = 0;
 var py = 0;
 var rotation = 0;
 var settings = [
-    ls.getItem('tubes-0') === null ?    1 : parseFloat(ls.getItem('tubes-0')),// audio volume
-    ls.getItem('tubes-1') === null ?   30 : parseInt(ls.getItem('tubes-1')),// milliseconds per frame
-    ls.getItem('tubes-2') === null ? 'AD' : ls.getItem('tubes-2'),// movement keys
-    ls.getItem('tubes-3') === null ?  'S' : ls.getItem('tubes-3'),// slowdown key
-    ls.getItem('tubes-4') === null ?  'W' : ls.getItem('tubes-4'),// speedup key
-    ls.getItem('tubes-5') === null// clear?
+  window.localStorage.getItem('tubes-0') === null
+    ? 1
+    : parseFloat(window.localStorage.getItem('tubes-0')),// audio volume
+  window.localStorage.getItem('tubes-1') === null
+    ? 30
+    : parseInt(window.localStorage.getItem('tubes-1')),// milliseconds per frame
+  window.localStorage.getItem('tubes-2') === null
+    ? 'AD'
+    : window.localStorage.getItem('tubes-2'),// movement keys
+  window.localStorage.getItem('tubes-3') === null
+    ? 'S'
+    : window.localStorage.getItem('tubes-3'),// slowdown key
+  window.localStorage.getItem('tubes-4') === null
+    ? 'W'
+    : window.localStorage.getItem('tubes-4'),// speedup key
+  window.localStorage.getItem('tubes-5') === null// clear?
 ];
 var speed = 0;
 var wall_splits = [];
