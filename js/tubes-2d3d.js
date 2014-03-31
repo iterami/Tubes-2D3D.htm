@@ -66,7 +66,7 @@ function draw(){
       x,
       y
     );
-    buffer.rotate(rotation * (Math.PI / 180));
+    buffer.rotate(rotation * pi_divide_180);
 
     // draw walls
     draw_walls(no_blink_fix);
@@ -82,7 +82,7 @@ function draw(){
     }
 
     // undo rotate/translate
-    buffer.rotate(-rotation * (Math.PI / 180));
+    buffer.rotate(-rotation * pi_divide_180);
     buffer.translate(
       -x,
       -y
@@ -403,6 +403,7 @@ var key_speedplus = 0;
 var mode = 0;
 var mx = 0;
 var my = 0;
+var pi_divide_180 = Math.PI / 180;
 var px = 0;
 var py = 0;
 var rotation = 0;
