@@ -31,22 +31,22 @@ function draw(){
             wall_splits[i * 2] = [
               -2,
               -2,
-               2,
+              2,
               -2,
               -2,
-               2,
-               2,
-               2
+              2,
+              2,
+              2
             ][i * 2];
             wall_splits[i * 2 + 1] = [
               -2,
               -2,
-               2,
+              2,
               -2,
               -2,
-               2,
-               2,
-               2
+              2,
+              2,
+              2
             ][i * 2 + 1];
 
             do_split = 1;
@@ -262,16 +262,15 @@ function reset(){
 
 function resize(){
     if(mode > 0){
-        width = window.innerWidth;
-        document.getElementById('buffer').width = width;
-        document.getElementById('canvas').width = width;
-
         height = window.innerHeight;
         document.getElementById('buffer').height = height;
         document.getElementById('canvas').height = height;
-
-        x = width / 2;
         y = height / 2;
+
+        width = window.innerWidth;
+        document.getElementById('buffer').width = width;
+        document.getElementById('canvas').width = width;
+        x = width / 2;
     }
 }
 
@@ -357,12 +356,12 @@ function setmode(newmode){
         wall_splits = [
           -2,
           -2,
-           2,
+          2,
           -2,
           -2,
-           2,
-           2,
-           2
+          2,
+          2,
+          2
         ];
 
         // set initial tube colors
