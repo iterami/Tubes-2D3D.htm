@@ -17,18 +17,23 @@ function draw(){
     do_split = 0;
 
     // move wall split location
-    i = 3;
+    var loop_counter = 3;
     do{
-        wall_splits[i * 2] += wall_splits[i * 2] >= 0 ? speed : -speed;
-        wall_splits[i * 2 + 1] += wall_splits[i * 2 + 1] >= 0 ? speed : -speed;
+        wall_splits[loop_counter * 2] += wall_splits[loop_counter * 2] >= 0
+          ? speed
+          : -speed;
+        wall_splits[loop_counter * 2 + 1] += wall_splits[loop_counter * 2 + 1] >= 0
+          ? speed
+          : -speed;
 
         // check if wall split reached edge of screen
-        if(wall_splits[i * 2] < -x || wall_splits[i * 2] > x){
+        if(wall_splits[loop_counter * 2] < -x
+          || wall_splits[loop_counter * 2] > x){
             // this temporary variable prevents blinking bug
             no_blink_fix = 0;
 
             // reset wall splits
-            wall_splits[i * 2] = [
+            wall_splits[loop_counter * 2] = [
               -2,
               -2,
               2,
@@ -37,8 +42,8 @@ function draw(){
               2,
               2,
               2
-            ][i * 2];
-            wall_splits[i * 2 + 1] = [
+            ][loop_counter * 2];
+            wall_splits[loop_counter * 2 + 1] = [
               -2,
               -2,
               2,
@@ -47,11 +52,11 @@ function draw(){
               2,
               2,
               2
-            ][i * 2 + 1];
+            ][loop_counter * 2 + 1];
 
             do_split = 1;
         }
-    }while(i--);
+    }while(loop_counter--);
 
     if(settings[5]){// clear?
         buffer.clearRect(
@@ -116,7 +121,7 @@ function draw(){
 
 function draw_walls(no_blink_fix){
     if(no_blink_fix){
-        i = 3;
+        var loop_counter = 3;
         do{
             buffer.beginPath();
             buffer.moveTo(
@@ -124,17 +129,17 @@ function draw_walls(no_blink_fix){
               0
             );
             buffer.lineTo(
-              wall_splits[[0,0,2,4][i]],
-              wall_splits[[1,1,3,5][i]]
+              wall_splits[[0,0,2,4][loop_counter]],
+              wall_splits[[1,1,3,5][loop_counter]]
             );
             buffer.lineTo(
-              wall_splits[[2,4,6,6][i]],
-              wall_splits[[3,5,7,7][i]]
+              wall_splits[[2,4,6,6][loop_counter]],
+              wall_splits[[3,5,7,7][loop_counter]]
             );
             buffer.closePath();
-            buffer.fillStyle = colors[0][i];
+            buffer.fillStyle = colors[0][loop_counter];
             buffer.fill();
-        }while(i--);
+        }while(loop_counter--);
     }
 
     buffer.beginPath();
@@ -222,7 +227,7 @@ function draw_walls(no_blink_fix){
     buffer.fill();
 
     if(!no_blink_fix){
-        i = 3;
+        loop_counter = 3;
         do{
             buffer.beginPath();
             buffer.moveTo(
@@ -230,17 +235,17 @@ function draw_walls(no_blink_fix){
               0
             );
             buffer.lineTo(
-              wall_splits[[0,0,2,4][i]],
-              wall_splits[[1,1,3,5][i]]
+              wall_splits[[0,0,2,4][loop_counter]],
+              wall_splits[[1,1,3,5][loop_counter]]
             );
             buffer.lineTo(
-              wall_splits[[2,4,6,6][i]],
-              wall_splits[[3,5,7,7][i]]
+              wall_splits[[2,4,6,6][loop_counter]],
+              wall_splits[[3,5,7,7][loop_counter]]
             );
             buffer.closePath();
-            buffer.fillStyle = colors[1][i];
+            buffer.fillStyle = colors[1][loop_counter];
             buffer.fill();
-        }while(i--);
+        }while(loop_counter--);
     }
 }
 
@@ -256,6 +261,7 @@ function reset(){
         document.getElementById('key-speedup').value = 'W';
         document.getElementById('movement-keys').value = 'AD';
         document.getElementById('ms-per-frame').value = 30;
+
         save();
     }
 }
@@ -275,48 +281,52 @@ function resize(){
 }
 
 function save(){
-    i = 1;
+    var loop_counter = 1;
     do{
         j = [
           'audio-volume',
           'ms-per-frame'
-        ][i];
+        ][loop_counter];
 
-        if(document.getElementById(j).value == [1, 30][i] || isNaN(document.getElementById(j).value) || document.getElementById(j).value < [0, 1][i]){
-            window.localStorage.removeItem('tubes-' + i);
-            settings[i] = [
+        if(document.getElementById(j).value == [1, 30][loop_counter]
+          || isNaN(document.getElementById(j).value)
+          || document.getElementById(j).value < [0, 1][loop_counter]){
+            window.localStorage.removeItem('tubes-' + loop_counter);
+            settings[loop_counter] = [
               1,
               30
-            ][i];
-            document.getElementById(j).value = settings[i];
+            ][loop_counter];
+            document.getElementById(j).value = settings[loop_counter];
 
         }else{
-            settings[i] = parseFloat(document.getElementById(j).value);
+            settings[loop_counter] = parseFloat(document.getElementById(j).value);
             window.localStorage.setItem(
-              'tubes-' + i,
-              settings[i]
+              'tubes-' + loop_counter,
+              settings[loop_counter]
             );
         }
-    }while(i--);
+    }while(loop_counter--);
 
-    i = 2;
+    loop_counter = 2;
     do{
-        if(document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value == ['AD', 'S', 'W'][i]){
-            window.localStorage.removeItem('tubes-' + (i + 2));
-            settings[i + 2] = [
+        if(document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][loop_counter]).value ==
+          ['AD', 'S', 'W'][loop_counter]){
+            window.localStorage.removeItem('tubes-' + (loop_counter + 2));
+            settings[loop_counter + 2] = [
               'AD',
               'S',
               'W'
-            ][i];
+            ][loop_counter];
 
         }else{
-            settings[i + 2] = document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][i]).value;
+            settings[loop_counter + 2] =
+              document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][loop_counter]).value;
             window.localStorage.setItem(
-              'tubes-' + (i + 2),
-              settings[i + 2]
+              'tubes-' + (loop_counter + 2),
+              settings[loop_counter + 2]
             );
         }
-    }while(i--);
+    }while(loop_counter--);
 
     settings[5] = document.getElementById('clear').checked;
     if(settings[5]){
@@ -392,7 +402,6 @@ var canvas = 0;
 var colors = [];
 var do_split = 0;
 var height = 0;
-var i = 0;
 var interval = 0;
 var j = 0;
 var key_left = 0;
