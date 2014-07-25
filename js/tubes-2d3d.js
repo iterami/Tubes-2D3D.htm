@@ -6,15 +6,16 @@ function draw(){
         rotation += speed / 10 + 1;
     }
 
-    if(key_speedminus && speed > 0){
+    if(key_speedminus
+      && speed > 0){
         speed -= 1;
     }
     if(key_speedplus){
         speed += 1;
     }
 
+    var do_split = 0;
     var no_blink_fix = 1;
-    do_split = 0;
 
     // move wall split location
     var loop_counter = 3;
@@ -380,7 +381,10 @@ function setmode(newmode){
           ['#0f0', '#f00', '#00f', '#0ff']// first swap
         ];
 
-        interval = setInterval('draw()', settings[1]);// milliseconds per frame
+        interval = setInterval(
+          'draw()',
+          settings[1]// milliseconds per frame
+        );
 
     // main menu mode
     }else{
@@ -400,7 +404,6 @@ function setmode(newmode){
 var buffer = 0;
 var canvas = 0;
 var colors = [];
-var do_split = 0;
 var height = 0;
 var interval = 0;
 var j = 0;
