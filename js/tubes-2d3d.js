@@ -257,7 +257,7 @@ function random_hex(){
 function reset(){
     if(confirm('Reset settings?')){
         document.getElementById('audio-volume').value = 1;
-        document.getElementById('clear').checked = 1;
+        document.getElementById('clear').checked = true;
         document.getElementById('key-slowdown').value = 'S';
         document.getElementById('key-speedup').value = 'W';
         document.getElementById('movement-keys').value = 'AD';
