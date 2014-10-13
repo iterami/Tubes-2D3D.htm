@@ -59,14 +59,12 @@ function draw(){
         }
     }while(loop_counter--);
 
-    if(settings[5]){// clear?
-        buffer.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
-    }
+    buffer.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
 
     buffer.translate(
       x,
@@ -105,14 +103,12 @@ function draw(){
       5
     );
 
-    if(settings[5]){// clear?
-        canvas.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
-    }
+    canvas.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
     canvas.drawImage(
       document.getElementById('buffer'),
       0,
@@ -257,7 +253,6 @@ function random_hex(){
 function reset(){
     if(confirm('Reset settings?')){
         document.getElementById('audio-volume').value = 1;
-        document.getElementById('clear').checked = true;
         document.getElementById('key-slowdown').value = 'S';
         document.getElementById('key-speedup').value = 'W';
         document.getElementById('movement-keys').value = 'AD';
@@ -328,17 +323,6 @@ function save(){
             );
         }
     }while(loop_counter--);
-
-    settings[5] = document.getElementById('clear').checked;
-    if(settings[5]){
-        window.localStorage.removeItem('tubes-5');
-
-    }else{
-        window.localStorage.setItem(
-          'tubes-5',
-          0
-        );
-    }
 }
 
 function setmode(newmode){
@@ -395,8 +379,7 @@ function setmode(newmode){
           + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
           + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
           + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
-          + settings[0] + '>Audio<br><label><input '
-          + (settings[5] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=ms-per-frame value='
+          + settings[0] + '>Audio<br><input id=ms-per-frame value='
           + settings[1] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
     }
 }
@@ -434,7 +417,6 @@ var settings = [
   window.localStorage.getItem('tubes-4') === null
     ? 'W'
     : window.localStorage.getItem('tubes-4'),// speedup key
-  window.localStorage.getItem('tubes-5') === null// clear?
 ];
 var speed = 0;
 var wall_splits = [];
