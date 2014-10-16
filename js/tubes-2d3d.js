@@ -277,52 +277,68 @@ function resize(){
 }
 
 function save(){
-    var loop_counter = 1;
-    do{
-        j = [
-          'audio-volume',
-          'ms-per-frame'
-        ][loop_counter];
+    // Save audio-volume setting.
+    if(document.getElementById('audio-volume').value == 1){
+        window.localStorage.removeItem('Tubes-2D3D.htm-audio-volume');
 
-        if(document.getElementById(j).value == [1, 30][loop_counter]
-          || isNaN(document.getElementById(j).value)
-          || document.getElementById(j).value < [0, 1][loop_counter]){
-            window.localStorage.removeItem('tubes-' + loop_counter);
-            settings[loop_counter] = [
-              1,
-              30
-            ][loop_counter];
-            document.getElementById(j).value = settings[loop_counter];
+    }else{
+        settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
+        window.localStorage.setItem(
+          'Tubes-2D3D.htm-audio-volume',
+          settings['audio-volume']
+        );
+    }
 
-        }else{
-            settings[loop_counter] = parseFloat(document.getElementById(j).value);
-            window.localStorage.setItem(
-              'tubes-' + loop_counter,
-              settings[loop_counter]
-            );
-        }
-    }while(loop_counter--);
+    // Save key-slowdown setting.
+    if(document.getElementById('key-slowdown').value == 'S'){
+        window.localStorage.removeItem('Tubes-2D3D.htm-key-slowdown');
 
-    loop_counter = 2;
-    do{
-        if(document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][loop_counter]).value ==
-          ['AD', 'S', 'W'][loop_counter]){
-            window.localStorage.removeItem('tubes-' + (loop_counter + 2));
-            settings[loop_counter + 2] = [
-              'AD',
-              'S',
-              'W'
-            ][loop_counter];
+    }else{
+        settings['key-slowdown'] = document.getElementById('key-slowdown').value;
+        window.localStorage.setItem(
+          'Tubes-2D3D.htm-key-slowdown',
+          settings['key-slowdown']
+        );
+    }
 
-        }else{
-            settings[loop_counter + 2] =
-              document.getElementById(['movement-keys', 'key-slowdown', 'key-speedup'][loop_counter]).value;
-            window.localStorage.setItem(
-              'tubes-' + (loop_counter + 2),
-              settings[loop_counter + 2]
-            );
-        }
-    }while(loop_counter--);
+    // Save key-speedup setting.
+    if(document.getElementById('key-speedup').value == 'W'){
+        window.localStorage.removeItem('Tubes-2D3D.htm-key-speedup');
+
+    }else{
+        settings['key-speedup'] = document.getElementById('key-speedup').value;
+        window.localStorage.setItem(
+          'Tubes-2D3D.htm-key-speedup',
+          settings['key-speedup']
+        );
+    }
+
+    // Save movement-keys setting.
+    if(document.getElementById('movement-keys').value == 'AD'){
+        window.localStorage.removeItem('Tubes-2D3D.htm-movement-keys');
+
+    }else{
+        settings['movement-keys'] = document.getElementById('movement-keys').value;
+        window.localStorage.setItem(
+          'Tubes-2D3D.htm-movement-keys',
+          settings['movement-keys']
+        );
+    }
+
+    // Save ms-per-frame setting.
+    if(document.getElementById('ms-per-frame').value == 30
+      || isNaN(document.getElementById('ms-per-frame').value)
+      || document.getElementById('ms-per-frame').value < 1){
+        window.localStorage.removeItem('Tubes-2D3D.htm-ms-per-frame');
+        document.getElementById('ms-per-frame').value = 30;
+
+    }else{
+        settings['ms-per-frame'] = parseInt(document.getElementById('ms-per-frame').value);
+        window.localStorage.setItem(
+          'Tubes-2D3D.htm-ms-per-frame',
+          settings['ms-per-frame']
+        );
+    }
 }
 
 function setmode(newmode){
@@ -367,7 +383,7 @@ function setmode(newmode){
 
         interval = setInterval(
           'draw()',
-          settings[1]// milliseconds per frame
+          settings['ms-per-frame']
         );
 
     // main menu mode
@@ -376,11 +392,11 @@ function setmode(newmode){
         canvas = 0;
 
         document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes-2D3D.htm</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
-          + settings[2] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
-          + settings[3] + '>Speed--<br><input id=key-speedup maxlength=1 value='
-          + settings[4] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
-          + settings[0] + '>Audio<br><input id=ms-per-frame value='
-          + settings[1] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
+          + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
+          + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
+          + settings['key-speedup'] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
+          + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
+          + settings['ms-per-frame'] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
     }
 }
 
@@ -401,23 +417,23 @@ var pi_divide_180 = Math.PI / 180;
 var px = 0;
 var py = 0;
 var rotation = 0;
-var settings = [
-  window.localStorage.getItem('tubes-0') === null
+var settings = {
+  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') === null
     ? 1
-    : parseFloat(window.localStorage.getItem('tubes-0')),// audio volume
-  window.localStorage.getItem('tubes-1') === null
-    ? 30
-    : parseInt(window.localStorage.getItem('tubes-1')),// milliseconds per frame
-  window.localStorage.getItem('tubes-2') === null
-    ? 'AD'
-    : window.localStorage.getItem('tubes-2'),// movement keys
-  window.localStorage.getItem('tubes-3') === null
+    : parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume')),
+  'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') === null
     ? 'S'
-    : window.localStorage.getItem('tubes-3'),// slowdown key
-  window.localStorage.getItem('tubes-4') === null
+    : window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown'),
+  'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') === null
     ? 'W'
-    : window.localStorage.getItem('tubes-4'),// speedup key
-];
+    : window.localStorage.getItem('Tubes-2D3D.htm-key-speedup'),
+  'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') === null
+    ? 'AD'
+    : window.localStorage.getItem('Tubes-2D3D.htm-movement-keys'),
+  'ms-per-frame': window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame') === null
+    ? 30
+    : parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame')),
+};
 var speed = 0;
 var wall_splits = [];
 var width = 0;
@@ -437,16 +453,16 @@ window.onkeydown = function(e){
         }else{
             key = String.fromCharCode(key);
 
-            if(key === settings[2][0]){
+            if(key === settings['movement-keys'][0]){
                 key_left = 1;
 
-            }else if(key === settings[2][1]){
+            }else if(key === settings['movement-keys'][1]){
                 key_right = 1;
 
-            }else if(key === settings[3]){
+            }else if(key === settings['key-slowdown']){
                 key_speedminus = 1;
 
-            }else if(key === settings[4]){
+            }else if(key === settings['key-speedup']){
                 key_speedplus = 1;
             }
         }
@@ -457,16 +473,16 @@ window.onkeyup = function(e){
     var key = window.event ? event : e;
     key = String.fromCharCode(key.charCode ? key.charCode : key.keyCode);
 
-    if(key === settings[2][0]){
+    if(key === settings['movement-keys'][0]){
         key_left = 0;
 
-    }else if(key === settings[2][1]){
+    }else if(key === settings['movement-keys'][1]){
         key_right = 0;
 
-    }else if(key === settings[3]){
+    }else if(key === settings['key-slowdown']){
         key_speedminus = 0;
 
-    }else if(key === settings[4]){
+    }else if(key === settings['key-speedup']){
         key_speedplus = 0;
     }
 };
