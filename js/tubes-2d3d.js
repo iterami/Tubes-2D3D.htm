@@ -17,7 +17,7 @@ function draw(){
     var do_split = 0;
     var no_blink_fix = 1;
 
-    // move wall split location
+    // Move wall split location.
     var loop_counter = 3;
     do{
         wall_splits[loop_counter * 2] += wall_splits[loop_counter * 2] >= 0
@@ -27,13 +27,13 @@ function draw(){
           ? speed
           : -speed;
 
-        // check if wall split reached edge of screen
+        // Check if wall split reached edge of screen.
         if(wall_splits[loop_counter * 2] < -x
           || wall_splits[loop_counter * 2] > x){
-            // this temporary variable prevents blinking bug
+            // This temporary variable prevents the blinking bug.
             no_blink_fix = 0;
 
-            // reset wall splits
+            // Reset wall splits.
             wall_splits[loop_counter * 2] = [
               -2,
               -2,
@@ -42,7 +42,7 @@ function draw(){
               -2,
               2,
               2,
-              2
+              2,
             ][loop_counter * 2];
             wall_splits[loop_counter * 2 + 1] = [
               -2,
@@ -52,7 +52,7 @@ function draw(){
               -2,
               2,
               2,
-              2
+              2,
             ][loop_counter * 2 + 1];
 
             do_split = 1;
@@ -72,7 +72,7 @@ function draw(){
     );
     buffer.rotate(rotation * pi_divide_180);
 
-    // draw walls
+    // Draw walls.
     draw_walls(no_blink_fix);
 
     if(do_split){
@@ -81,18 +81,18 @@ function draw(){
           '#' + random_hex() + random_hex() + random_hex(),
           '#' + random_hex() + random_hex() + random_hex(),
           '#' + random_hex() + random_hex() + random_hex(),
-          '#' + random_hex() + random_hex() + random_hex()
+          '#' + random_hex() + random_hex() + random_hex(),
         ];
     }
 
-    // undo rotate/translate
+    // Undo rotate/translate.
     buffer.rotate(-rotation * pi_divide_180);
     buffer.translate(
       -x,
       -y
     );
 
-    // draw current speed
+    // Draw current speed.
     buffer.font = '23pt sans-serif';
     buffer.textAlign = 'left';
     buffer.textBaseline = 'top';
@@ -126,12 +126,12 @@ function draw_walls(no_blink_fix){
               0
             );
             buffer.lineTo(
-              wall_splits[[0,0,2,4][loop_counter]],
-              wall_splits[[1,1,3,5][loop_counter]]
+              wall_splits[[0,0,2,4,][loop_counter]],
+              wall_splits[[1,1,3,5,][loop_counter]]
             );
             buffer.lineTo(
-              wall_splits[[2,4,6,6][loop_counter]],
-              wall_splits[[3,5,7,7][loop_counter]]
+              wall_splits[[2,4,6,6,][loop_counter]],
+              wall_splits[[3,5,7,7,][loop_counter]]
             );
             buffer.closePath();
             buffer.fillStyle = colors[0][loop_counter];
@@ -232,12 +232,12 @@ function draw_walls(no_blink_fix){
               0
             );
             buffer.lineTo(
-              wall_splits[[0,0,2,4][loop_counter]],
-              wall_splits[[1,1,3,5][loop_counter]]
+              wall_splits[[0,0,2,4,][loop_counter]],
+              wall_splits[[1,1,3,5,][loop_counter]]
             );
             buffer.lineTo(
-              wall_splits[[2,4,6,6][loop_counter]],
-              wall_splits[[3,5,7,7][loop_counter]]
+              wall_splits[[2,4,6,6,][loop_counter]],
+              wall_splits[[3,5,7,7,][loop_counter]]
             );
             buffer.closePath();
             buffer.fillStyle = colors[1][loop_counter];
@@ -346,7 +346,7 @@ function setmode(newmode){
 
     mode = newmode;
 
-    // new game mode
+    // New game mode.
     if(mode > 0){
         save();
 
@@ -372,13 +372,13 @@ function setmode(newmode){
           -2,
           2,
           2,
-          2
+          2,
         ];
 
-        // set initial tube colors
+        // Set initial tube colors.
         colors = [
-          ['#f0f', '#06f', '#ff0', '#f60'],// initial
-          ['#0f0', '#f00', '#00f', '#0ff']// first swap
+          ['#f0f', '#06f', '#ff0', '#f60'],// Initial
+          ['#0f0', '#f00', '#00f', '#0ff'],// First swap
         ];
 
         interval = setInterval(
@@ -386,7 +386,7 @@ function setmode(newmode){
           settings['ms-per-frame']
         );
 
-    // main menu mode
+    // Main menu mode.
     }else{
         buffer = 0;
         canvas = 0;
@@ -443,28 +443,31 @@ var y = 0;
 setmode(0);
 
 window.onkeydown = function(e){
-    if(mode > 0){
-        var key = window.event ? event : e;
-        key = key.charCode ? key.charCode : key.keyCode;
+    if(mode <= 0){
+        return;
+    }
 
-        if(key === 27){// ESC
-            setmode(0);
+    var key = window.event ? event : e;
+    key = key.charCode ? key.charCode : key.keyCode;
 
-        }else{
-            key = String.fromCharCode(key);
+    // ESC: return to main menu.
+    if(key === 27){
+        setmode(0);
 
-            if(key === settings['movement-keys'][0]){
-                key_left = 1;
+    }else{
+        key = String.fromCharCode(key);
 
-            }else if(key === settings['movement-keys'][1]){
-                key_right = 1;
+        if(key === settings['movement-keys'][0]){
+            key_left = 1;
 
-            }else if(key === settings['key-slowdown']){
-                key_speedminus = 1;
+        }else if(key === settings['movement-keys'][1]){
+            key_right = 1;
 
-            }else if(key === settings['key-speedup']){
-                key_speedplus = 1;
-            }
+        }else if(key === settings['key-slowdown']){
+            key_speedminus = 1;
+
+        }else if(key === settings['key-speedup']){
+            key_speedplus = 1;
         }
     }
 };
