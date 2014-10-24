@@ -251,29 +251,33 @@ function random_hex(){
 }
 
 function reset(){
-    if(confirm('Reset settings?')){
-        document.getElementById('audio-volume').value = 1;
-        document.getElementById('key-slowdown').value = 'S';
-        document.getElementById('key-speedup').value = 'W';
-        document.getElementById('movement-keys').value = 'AD';
-        document.getElementById('ms-per-frame').value = 30;
-
-        save();
+    if(!confirm('Reset settings?')){
+        return;
     }
+
+    document.getElementById('audio-volume').value = 1;
+    document.getElementById('key-slowdown').value = 'S';
+    document.getElementById('key-speedup').value = 'W';
+    document.getElementById('movement-keys').value = 'AD';
+    document.getElementById('ms-per-frame').value = 30;
+
+    save();
 }
 
 function resize(){
-    if(mode > 0){
-        height = window.innerHeight;
-        document.getElementById('buffer').height = height;
-        document.getElementById('canvas').height = height;
-        y = height / 2;
-
-        width = window.innerWidth;
-        document.getElementById('buffer').width = width;
-        document.getElementById('canvas').width = width;
-        x = width / 2;
+    if(mode <= 0){
+        return;
     }
+
+    height = window.innerHeight;
+    document.getElementById('buffer').height = height;
+    document.getElementById('canvas').height = height;
+    y = height / 2;
+
+    width = window.innerWidth;
+    document.getElementById('buffer').width = width;
+    document.getElementById('canvas').width = width;
+    x = width / 2;
 }
 
 function save(){
