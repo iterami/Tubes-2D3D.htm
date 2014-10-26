@@ -78,10 +78,10 @@ function draw(){
     if(do_split){
         colors[1] = colors[0];
         colors[0] = [
-          '#' + random_hex() + random_hex() + random_hex(),
-          '#' + random_hex() + random_hex() + random_hex(),
-          '#' + random_hex() + random_hex() + random_hex(),
-          '#' + random_hex() + random_hex() + random_hex(),
+          random_hex(),
+          random_hex(),
+          random_hex(),
+          random_hex(),
         ];
     }
 
@@ -247,7 +247,11 @@ function draw_walls(no_blink_fix){
 }
 
 function random_hex(){
-    return '0123456789abcdef'.charAt(Math.floor(Math.random() * 16));
+    var choices = '0123456789abcdef';
+    return '#'
+      + choices.charAt(Math.floor(Math.random() * 16))
+      + choices.charAt(Math.floor(Math.random() * 16))
+      + choices.charAt(Math.floor(Math.random() * 16));
 }
 
 function reset(){
