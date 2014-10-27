@@ -66,6 +66,10 @@ function draw(){
       height
     );
 
+    // Save current buffer state.
+    buffer.save();
+
+    // Setup translate/rotation for wall drawing.
     buffer.translate(
       x,
       y
@@ -85,12 +89,8 @@ function draw(){
         ];
     }
 
-    // Undo rotate/translate.
-    buffer.rotate(-rotation * pi_divide_180);
-    buffer.translate(
-      -x,
-      -y
-    );
+    // Restore buffer state.
+    buffer.restore();
 
     // Draw current speed.
     buffer.font = '23pt sans-serif';
