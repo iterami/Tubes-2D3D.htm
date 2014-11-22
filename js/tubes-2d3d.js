@@ -455,8 +455,7 @@ window.onkeydown = function(e){
         return;
     }
 
-    var key = window.event ? event : e;
-    key = key.charCode ? key.charCode : key.keyCode;
+    var key = e.keyCode || e.which;
 
     // ESC: return to main menu.
     if(key === 27){
@@ -481,8 +480,7 @@ window.onkeydown = function(e){
 };
 
 window.onkeyup = function(e){
-    var key = window.event ? event : e;
-    key = String.fromCharCode(key.charCode ? key.charCode : key.keyCode);
+    var key = String.fromCharCode(e.keyCode || e.which);
 
     if(key === settings['movement-keys'][0]){
         key_left = false;
