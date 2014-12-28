@@ -1,64 +1,4 @@
 function draw(){
-    if(key_left){
-        rotation -= speed / 10 + 1;
-    }
-    if(key_right){
-        rotation += speed / 10 + 1;
-    }
-
-    if(key_speedminus
-      && speed > 0){
-        speed -= 1;
-    }
-    if(key_speedplus){
-        speed += 1;
-    }
-
-    var do_split = 0;
-    var no_blink_fix = 1;
-
-    // Move wall split location.
-    var loop_counter = 3;
-    do{
-        wall_splits[loop_counter * 2] += wall_splits[loop_counter * 2] >= 0
-          ? speed
-          : -speed;
-        wall_splits[loop_counter * 2 + 1] += wall_splits[loop_counter * 2 + 1] >= 0
-          ? speed
-          : -speed;
-
-        // Check if wall split reached edge of screen.
-        if(wall_splits[loop_counter * 2] < -x
-          || wall_splits[loop_counter * 2] > x){
-            // This temporary variable prevents the blinking bug.
-            no_blink_fix = 0;
-
-            // Reset wall splits.
-            wall_splits[loop_counter * 2] = [
-              -2,
-              -2,
-              2,
-              -2,
-              -2,
-              2,
-              2,
-              2,
-            ][loop_counter * 2];
-            wall_splits[loop_counter * 2 + 1] = [
-              -2,
-              -2,
-              2,
-              -2,
-              -2,
-              2,
-              2,
-              2,
-            ][loop_counter * 2 + 1];
-
-            do_split = 1;
-        }
-    }while(loop_counter--);
-
     buffer.clearRect(
       0,
       0,
@@ -77,17 +17,7 @@ function draw(){
     buffer.rotate(rotation * pi_divide_180);
 
     // Draw walls.
-    draw_walls(no_blink_fix);
-
-    if(do_split){
-        colors[1] = colors[0];
-        colors[0] = [
-          random_hex(),
-          random_hex(),
-          random_hex(),
-          random_hex(),
-        ];
-    }
+    draw_walls();
 
     // Restore buffer state.
     buffer.restore();
@@ -114,135 +44,181 @@ function draw(){
       0,
       0
     );
+
+    window.requestAnimationFrame(draw);
 }
 
-function draw_walls(no_blink_fix){
-    if(no_blink_fix){
-        var loop_counter = 3;
-        do{
-            buffer.beginPath();
-            buffer.moveTo(
-              0,
-              0
-            );
-            buffer.lineTo(
-              wall_splits[[0,0,2,4,][loop_counter]],
-              wall_splits[[1,1,3,5,][loop_counter]]
-            );
-            buffer.lineTo(
-              wall_splits[[2,4,6,6,][loop_counter]],
-              wall_splits[[3,5,7,7,][loop_counter]]
-            );
-            buffer.closePath();
-            buffer.fillStyle = colors[0][loop_counter];
-            buffer.fill();
-        }while(loop_counter--);
+function draw_walls(){
+    var loop_counter = 3;
+    do{
+        buffer.beginPath();
+        buffer.moveTo(
+          0,
+          0
+        );
+        buffer.lineTo(
+          wall_splits[[0,0,2,4,][loop_counter]],
+          wall_splits[[1,1,3,5,][loop_counter]]
+        );
+        buffer.lineTo(
+          wall_splits[[2,4,6,6,][loop_counter]],
+          wall_splits[[3,5,7,7,][loop_counter]]
+        );
+        buffer.closePath();
+        buffer.fillStyle = colors[0][loop_counter];
+        buffer.fill();
+    }while(loop_counter--);
+
+    buffer.beginPath();
+    buffer.moveTo(
+      -x,
+      -x
+    );
+    buffer.lineTo(
+      wall_splits[0],
+      wall_splits[1]
+    );
+    buffer.lineTo(
+      wall_splits[2],
+      wall_splits[3]
+    );
+    buffer.lineTo(
+      x,
+      -x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[1][0];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+      -x,
+      -x
+    );
+    buffer.lineTo(
+      wall_splits[0],
+      wall_splits[1]
+    );
+    buffer.lineTo(
+      wall_splits[4],
+      wall_splits[5]
+    );
+    buffer.lineTo(
+      -x,
+      x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[1][1];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+      x,
+      -x
+    );
+    buffer.lineTo(
+      wall_splits[2],
+      wall_splits[3]
+    );
+    buffer.lineTo(
+      wall_splits[6],
+      wall_splits[7]
+    );
+    buffer.lineTo(
+      x,
+      x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[1][2];
+    buffer.fill();
+
+    buffer.beginPath();
+    buffer.moveTo(
+      -x,
+      x
+    );
+    buffer.lineTo(
+      wall_splits[4],
+      wall_splits[5]
+    );
+    buffer.lineTo(
+      wall_splits[6],
+      wall_splits[7]
+    );
+    buffer.lineTo(
+      x,
+      x
+    );
+    buffer.closePath();
+    buffer.fillStyle = colors[1][3];
+    buffer.fill();
+}
+
+function logic(){
+    if(key_left){
+        rotation -= speed / 10 + 1;
+    }
+    if(key_right){
+        rotation += speed / 10 + 1;
     }
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      -x
-    );
-    buffer.lineTo(
-      wall_splits[0],
-      wall_splits[1]
-    );
-    buffer.lineTo(
-      wall_splits[2],
-      wall_splits[3]
-    );
-    buffer.lineTo(
-      x,
-      -x
-    );
-    buffer.closePath();
-    buffer.fillStyle = colors[no_blink_fix][0];
-    buffer.fill();
+    if(key_speedminus
+      && speed > 0){
+        speed -= 1;
+    }
+    if(key_speedplus){
+        speed += 1;
+    }
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      -x
-    );
-    buffer.lineTo(
-      wall_splits[0],
-      wall_splits[1]
-    );
-    buffer.lineTo(
-      wall_splits[4],
-      wall_splits[5]
-    );
-    buffer.lineTo(
-      -x,
-      x
-    );
-    buffer.closePath();
-    buffer.fillStyle = colors[no_blink_fix][1];
-    buffer.fill();
+    var do_split = 0;
 
-    buffer.beginPath();
-    buffer.moveTo(
-      x,
-      -x
-    );
-    buffer.lineTo(
-      wall_splits[2],
-      wall_splits[3]
-    );
-    buffer.lineTo(
-      wall_splits[6],
-      wall_splits[7]
-    );
-    buffer.lineTo(
-      x,
-      x
-    );
-    buffer.closePath();
-    buffer.fillStyle = colors[no_blink_fix][2];
-    buffer.fill();
+    // Move wall split location.
+    var loop_counter = 3;
+    do{
+        wall_splits[loop_counter * 2] += wall_splits[loop_counter * 2] >= 0
+          ? speed
+          : -speed;
+        wall_splits[loop_counter * 2 + 1] += wall_splits[loop_counter * 2 + 1] >= 0
+          ? speed
+          : -speed;
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      x
-    );
-    buffer.lineTo(
-      wall_splits[4],
-      wall_splits[5]
-    );
-    buffer.lineTo(
-      wall_splits[6],
-      wall_splits[7]
-    );
-    buffer.lineTo(
-      x,
-      x
-    );
-    buffer.closePath();
-    buffer.fillStyle = colors[no_blink_fix][3];
-    buffer.fill();
+        // Check if wall split reached edge of screen.
+        if(wall_splits[loop_counter * 2] < -x
+          || wall_splits[loop_counter * 2] > x){
+            // Reset wall splits.
+            wall_splits[loop_counter * 2] = [
+              -2,
+              -2,
+              2,
+              -2,
+              -2,
+              2,
+              2,
+              2,
+            ][loop_counter * 2];
+            wall_splits[loop_counter * 2 + 1] = [
+              -2,
+              -2,
+              2,
+              -2,
+              -2,
+              2,
+              2,
+              2,
+            ][loop_counter * 2 + 1];
 
-    if(!no_blink_fix){
-        loop_counter = 3;
-        do{
-            buffer.beginPath();
-            buffer.moveTo(
-              0,
-              0
-            );
-            buffer.lineTo(
-              wall_splits[[0,0,2,4,][loop_counter]],
-              wall_splits[[1,1,3,5,][loop_counter]]
-            );
-            buffer.lineTo(
-              wall_splits[[2,4,6,6,][loop_counter]],
-              wall_splits[[3,5,7,7,][loop_counter]]
-            );
-            buffer.closePath();
-            buffer.fillStyle = colors[1][loop_counter];
-            buffer.fill();
-        }while(loop_counter--);
+            do_split = 1;
+        }
+    }while(loop_counter--);
+
+    if(do_split){
+        colors[1] = colors[0];
+        colors[0] = [
+          random_hex(),
+          random_hex(),
+          random_hex(),
+          random_hex(),
+        ];
     }
 }
 
@@ -389,8 +365,9 @@ function setmode(newmode){
           ['#0f0', '#f00', '#00f', '#0ff'],// First swap
         ];
 
+        window.requestAnimationFrame(draw);
         interval = setInterval(
-          'draw()',
+          'logic()',
           settings['ms-per-frame']
         );
 
