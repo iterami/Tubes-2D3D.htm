@@ -45,7 +45,7 @@ function draw(){
       0
     );
 
-    window.requestAnimationFrame(draw);
+    animationFrame = window.requestAnimationFrame(draw);
 }
 
 function draw_walls(){
@@ -326,6 +326,7 @@ function save(){
 }
 
 function setmode(newmode){
+    window.cancelAnimationFrame(animationFrame);
     clearInterval(interval);
 
     mode = newmode;
@@ -365,7 +366,7 @@ function setmode(newmode){
           ['#0f0', '#f00', '#00f', '#0ff'],// First swap
         ];
 
-        window.requestAnimationFrame(draw);
+        animationFrame = window.requestAnimationFrame(draw);
         interval = setInterval(
           'logic()',
           settings['ms-per-frame']
@@ -385,6 +386,7 @@ function setmode(newmode){
     }
 }
 
+var animationFrame = 0;
 var buffer = 0;
 var canvas = 0;
 var colors = [];
