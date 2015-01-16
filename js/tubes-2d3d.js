@@ -439,22 +439,22 @@ window.onkeydown = function(e){
     // ESC: return to main menu.
     if(key === 27){
         setmode(0);
+        return;
+    }
 
-    }else{
-        key = String.fromCharCode(key);
+    key = String.fromCharCode(key);
 
-        if(key === settings['movement-keys'][0]){
-            key_left = true;
+    if(key === settings['movement-keys'][0]){
+        key_left = true;
 
-        }else if(key === settings['movement-keys'][1]){
-            key_right = true;
+    }else if(key === settings['movement-keys'][1]){
+        key_right = true;
 
-        }else if(key === settings['key-slowdown']){
-            key_speedminus = true;
+    }else if(key === settings['key-slowdown']){
+        key_speedminus = true;
 
-        }else if(key === settings['key-speedup']){
-            key_speedplus = true;
-        }
+    }else if(key === settings['key-speedup']){
+        key_speedplus = true;
     }
 };
 
