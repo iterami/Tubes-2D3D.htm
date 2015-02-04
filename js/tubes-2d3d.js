@@ -392,7 +392,6 @@ var canvas = 0;
 var colors = [];
 var height = 0;
 var interval = 0;
-var j = 0;
 var key_left = false;
 var key_right = false;
 var key_speedminus = false;
