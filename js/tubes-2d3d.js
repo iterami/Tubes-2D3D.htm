@@ -327,7 +327,7 @@ function save(){
 
 function setmode(newmode){
     window.cancelAnimationFrame(animationFrame);
-    clearInterval(interval);
+    window.clearInterval(interval);
 
     mode = newmode;
 
@@ -367,7 +367,7 @@ function setmode(newmode){
         ];
 
         animationFrame = window.requestAnimationFrame(draw);
-        interval = setInterval(
+        interval = window.setInterval(
           'logic()',
           settings['ms-per-frame']
         );
