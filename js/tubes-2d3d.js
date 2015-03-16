@@ -260,10 +260,11 @@ function resize(){
     x = width / 2;
 }
 
+// Save settings into window.localStorage if they differ from default.
 function save(){
-    // Save audio-volume setting.
     if(document.getElementById('audio-volume').value == 1){
         window.localStorage.removeItem('Tubes-2D3D.htm-audio-volume');
+        settings['audio-volume'] = 1;
 
     }else{
         settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
@@ -273,9 +274,9 @@ function save(){
         );
     }
 
-    // Save key-slowdown setting.
     if(document.getElementById('key-slowdown').value == 'S'){
         window.localStorage.removeItem('Tubes-2D3D.htm-key-slowdown');
+        settings['key-slowdown'] = 'S';
 
     }else{
         settings['key-slowdown'] = document.getElementById('key-slowdown').value;
@@ -285,9 +286,9 @@ function save(){
         );
     }
 
-    // Save key-speedup setting.
     if(document.getElementById('key-speedup').value == 'W'){
         window.localStorage.removeItem('Tubes-2D3D.htm-key-speedup');
+        settings['key-speedup'] = 'W';
 
     }else{
         settings['key-speedup'] = document.getElementById('key-speedup').value;
@@ -297,9 +298,9 @@ function save(){
         );
     }
 
-    // Save movement-keys setting.
     if(document.getElementById('movement-keys').value == 'AD'){
         window.localStorage.removeItem('Tubes-2D3D.htm-movement-keys');
+        settings['audio-volume'] = 'AD';
 
     }else{
         settings['movement-keys'] = document.getElementById('movement-keys').value;
@@ -309,12 +310,11 @@ function save(){
         );
     }
 
-    // Save ms-per-frame setting.
     if(document.getElementById('ms-per-frame').value == 30
       || isNaN(document.getElementById('ms-per-frame').value)
       || document.getElementById('ms-per-frame').value < 1){
         window.localStorage.removeItem('Tubes-2D3D.htm-ms-per-frame');
-        document.getElementById('ms-per-frame').value = 30;
+        settings['ms-per-frame'] = 30;
 
     }else{
         settings['ms-per-frame'] = parseInt(document.getElementById('ms-per-frame').value);
@@ -377,7 +377,7 @@ function setmode(newmode){
         buffer = 0;
         canvas = 0;
 
-        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Tubes-2D3D.htm</b></div><hr><div class=c style=color:#f00>SEIZURE WARNING!<br>FLASHING COLORS!</div><hr><div class=c><ul><li><a onclick=setmode(1)>Make Mama Sick</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick=setmode(1)>Enter the Tubes</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
           + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
           + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
           + settings['key-speedup'] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
