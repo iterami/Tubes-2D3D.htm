@@ -17,38 +17,6 @@ function draw(){
     buffer.rotate(rotation * pi_divide_180);
 
     // Draw walls.
-    draw_walls();
-
-    // Restore buffer state.
-    buffer.restore();
-
-    // Draw current speed.
-    buffer.font = '23pt sans-serif';
-    buffer.textAlign = 'left';
-    buffer.textBaseline = 'top';
-    buffer.fillStyle = '#fff';
-    buffer.fillText(
-      speed + ' m/s',
-      5,
-      5
-    );
-
-    canvas.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-    canvas.drawImage(
-      document.getElementById('buffer'),
-      0,
-      0
-    );
-
-    animationFrame = window.requestAnimationFrame(draw);
-}
-
-function draw_walls(){
     var loop_counter = 3;
     do{
         buffer.beginPath();
@@ -152,6 +120,34 @@ function draw_walls(){
     buffer.closePath();
     buffer.fillStyle = colors[1][3];
     buffer.fill();
+
+    // Restore buffer state.
+    buffer.restore();
+
+    // Draw current speed.
+    buffer.font = '23pt sans-serif';
+    buffer.textAlign = 'left';
+    buffer.textBaseline = 'top';
+    buffer.fillStyle = '#fff';
+    buffer.fillText(
+      speed + ' m/s',
+      5,
+      5
+    );
+
+    canvas.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
+    canvas.drawImage(
+      document.getElementById('buffer'),
+      0,
+      0
+    );
+
+    animationFrame = window.requestAnimationFrame(draw);
 }
 
 function logic(){
