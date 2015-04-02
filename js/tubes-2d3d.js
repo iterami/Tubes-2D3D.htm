@@ -296,7 +296,7 @@ function save(){
 
     if(document.getElementById('movement-keys').value == 'AD'){
         window.localStorage.removeItem('Tubes-2D3D.htm-movement-keys');
-        settings['audio-volume'] = 'AD';
+        settings['movement-keys'] = 'AD';
 
     }else{
         settings['movement-keys'] = document.getElementById('movement-keys').value;
@@ -400,21 +400,11 @@ var px = 0;
 var py = 0;
 var rotation = 0;
 var settings = {
-  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') === null
-    ? 1
-    : parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume')),
-  'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') === null
-    ? 'S'
-    : window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown'),
-  'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') === null
-    ? 'W'
-    : window.localStorage.getItem('Tubes-2D3D.htm-key-speedup'),
-  'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') === null
-    ? 'AD'
-    : window.localStorage.getItem('Tubes-2D3D.htm-movement-keys'),
-  'ms-per-frame': window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame') === null
-    ? 30
-    : parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame')),
+  'audio-volume': parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume')) || 1,
+  'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') || 'S',
+  'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') || 'W',
+  'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') || 'AD',
+  'ms-per-frame': parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame')) || 30,
 };
 var speed = 0;
 var wall_splits = [];
