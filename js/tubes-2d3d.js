@@ -127,12 +127,11 @@ function draw(){
     // Draw current speed.
     buffer.font = '23pt sans-serif';
     buffer.textAlign = 'left';
-    buffer.textBaseline = 'top';
     buffer.fillStyle = '#fff';
     buffer.fillText(
       speed + ' m/s',
       5,
-      5
+      25
     );
 
     canvas.clearRect(
