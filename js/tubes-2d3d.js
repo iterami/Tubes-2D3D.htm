@@ -126,7 +126,6 @@ function draw(){
 
     // Draw current speed.
     buffer.font = '23pt sans-serif';
-    buffer.textAlign = 'left';
     buffer.fillStyle = '#fff';
     buffer.fillText(
       speed + ' m/s',
