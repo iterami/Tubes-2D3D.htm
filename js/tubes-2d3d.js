@@ -399,7 +399,9 @@ var px = 0;
 var py = 0;
 var rotation = 0;
 var settings = {
-  'audio-volume': parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume')) || 1,
+  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') != null
+    ? parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume'))
+    : 1,
   'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') || 'S',
   'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') || 'W',
   'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') || 'AD',
