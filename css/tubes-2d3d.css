@@ -32,3 +32,6 @@ input{
     text-align: center;
     width: 75px;
 }
+input[type=range]{
+    cursor: pointer;
+}
