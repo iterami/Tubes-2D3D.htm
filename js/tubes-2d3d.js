@@ -14,7 +14,7 @@ function draw(){
       x,
       y
     );
-    buffer.rotate(rotation * pi_divide_180);
+    buffer.rotate(rotation * degree);
 
     // Draw walls.
     var loop_counter = 3;
@@ -385,6 +385,7 @@ var animationFrame = 0;
 var buffer = 0;
 var canvas = 0;
 var colors = [];
+var degree = Math.PI / 180;
 var height = 0;
 var interval = 0;
 var key_left = false;
@@ -394,7 +395,6 @@ var key_speedplus = false;
 var mode = 0;
 var mx = 0;
 var my = 0;
-var pi_divide_180 = Math.PI / 180;
 var px = 0;
 var py = 0;
 var rotation = 0;
