@@ -336,7 +336,7 @@ function setmode(newmode){
         speed = 10;
         rotation = 0;
 
-        document.getElementById('page').innerHTML = '<canvas id=canvas></canvas><canvas id=buffer style=display:none></canvas>';
+        document.getElementById('page').innerHTML = '<canvas id=canvas></canvas><canvas id=buffer></canvas>';
 
         buffer = document.getElementById('buffer').getContext('2d');
         canvas = document.getElementById('canvas').getContext('2d');
