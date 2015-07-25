@@ -270,40 +270,23 @@ function save(){
         );
     }
 
-    if(document.getElementById('key-slowdown').value == 'S'){
-        window.localStorage.removeItem('Tubes-2D3D.htm-key-slowdown');
-        settings['key-slowdown'] = 'S';
+    var ids = {
+      'key-slowdown': 'S',
+      'key-speedup': 'W',
+      'movement-keys': 'AD',
+    };
+    for(var id in ids){
+        if(document.getElementById(id).value === ids[id]){
+            window.localStorage.removeItem('Tubes-2D3D.htm-' + id);
+            settings[id] = ids[id];
 
-    }else{
-        settings['key-slowdown'] = document.getElementById('key-slowdown').value;
-        window.localStorage.setItem(
-          'Tubes-2D3D.htm-key-slowdown',
-          settings['key-slowdown']
-        );
-    }
-
-    if(document.getElementById('key-speedup').value == 'W'){
-        window.localStorage.removeItem('Tubes-2D3D.htm-key-speedup');
-        settings['key-speedup'] = 'W';
-
-    }else{
-        settings['key-speedup'] = document.getElementById('key-speedup').value;
-        window.localStorage.setItem(
-          'Tubes-2D3D.htm-key-speedup',
-          settings['key-speedup']
-        );
-    }
-
-    if(document.getElementById('movement-keys').value == 'AD'){
-        window.localStorage.removeItem('Tubes-2D3D.htm-movement-keys');
-        settings['movement-keys'] = 'AD';
-
-    }else{
-        settings['movement-keys'] = document.getElementById('movement-keys').value;
-        window.localStorage.setItem(
-          'Tubes-2D3D.htm-movement-keys',
-          settings['movement-keys']
-        );
+        }else{
+            settings[id] = document.getElementById(id).value;
+            window.localStorage.setItem(
+              'Tubes-2D3D.htm-' + id,
+              settings[id]
+            );
+        }
     }
 
     if(document.getElementById('ms-per-frame').value == 30
