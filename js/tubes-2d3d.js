@@ -321,7 +321,8 @@ function setmode(newmode){
         speed = 10;
         rotation = 0;
 
-        document.getElementById('page').innerHTML = '<canvas id=canvas></canvas><canvas id=buffer></canvas>';
+        document.getElementById('page').innerHTML =
+          '<canvas id=canvas></canvas><canvas id=buffer></canvas>';
 
         var contextAttributes = {
           'alpha': false,
