@@ -368,10 +368,10 @@ function setmode(newmode){
     buffer = 0;
     canvas = 0;
 
-    document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick=setmode(1)>Enter the Tubes</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+    document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div><a onclick=setmode(1)>Enter the Tubes</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
       + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
       + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
-      + settings['key-speedup'] + '>Speed++</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
+      + settings['key-speedup'] + '>Speed++</div><hr><div><input id=audio-volume max=1 min=0 step=.01 type=range value='
       + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
       + settings['ms-per-frame'] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
 }
