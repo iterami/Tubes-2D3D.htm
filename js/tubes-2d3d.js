@@ -321,7 +321,7 @@ function setmode(newmode){
         speed = 10;
         rotation = 0;
 
-        document.getElementById('page').innerHTML =
+        document.body.innerHTML =
           '<canvas id=canvas></canvas><canvas id=buffer></canvas>';
 
         var contextAttributes = {
@@ -368,7 +368,7 @@ function setmode(newmode){
     buffer = 0;
     canvas = 0;
 
-    document.getElementById('page').innerHTML = '<div><div><a onclick=setmode(1)>Enter the Tubes</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+    document.body.innerHTML = '<div><div><a onclick=setmode(1)>Enter the Tubes</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
       + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
       + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
       + settings['key-speedup'] + '>Speed++</div><hr><div><input id=audio-volume max=1 min=0 step=.01 type=range value='
