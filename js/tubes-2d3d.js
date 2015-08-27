@@ -127,7 +127,6 @@ function draw(){
     buffer.restore();
 
     // Draw current speed.
-    buffer.font = '23pt sans-serif';
     buffer.fillStyle = '#fff';
     buffer.fillText(
       speed + ' m/s',
@@ -337,6 +336,8 @@ function setmode(newmode){
         );
 
         resize();
+
+        buffer.font = '23pt sans-serif';
 
         wall_splits = [
           -2,
