@@ -391,7 +391,7 @@ var key_speedplus = false;
 var mode = 0;
 var rotation = 0;
 var settings = {
-  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') != null
+  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') !== null
     ? parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume'))
     : 1,
   'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') || 'S',
