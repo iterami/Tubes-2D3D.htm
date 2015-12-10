@@ -293,8 +293,8 @@ function save(){
     }
 
     var ms_per_frame = document.getElementById('ms-per-frame').value;
-    if(isNaN(ms_per_frame)
-      || ms_per_frame == 30
+    if(ms_per_frame == 30
+      || isNaN(ms_per_frame)
       || ms_per_frame < 1){
         window.localStorage.removeItem('Tubes-2D3D.htm-ms-per-frame');
         settings['ms-per-frame'] = 30;
