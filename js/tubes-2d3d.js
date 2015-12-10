@@ -259,12 +259,13 @@ function resize(){
 
 // Save settings into window.localStorage if they differ from default.
 function save(){
-    if(document.getElementById('audio-volume').value == 1){
+    var audio_volume = document.getElementById('audio-volume').value;
+    if(audio_volume == 1){
         window.localStorage.removeItem('Tubes-2D3D.htm-audio-volume');
         settings['audio-volume'] = 1;
 
     }else{
-        settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
+        settings['audio-volume'] = parseFloat(audio_volume);
         window.localStorage.setItem(
           'Tubes-2D3D.htm-audio-volume',
           settings['audio-volume']
@@ -277,12 +278,13 @@ function save(){
       'movement-keys': 'AD',
     };
     for(var id in ids){
-        if(document.getElementById(id).value === ids[id]){
+        var value = document.getElementById(id).value;
+        if(value === ids[id]){
             window.localStorage.removeItem('Tubes-2D3D.htm-' + id);
             settings[id] = ids[id];
 
         }else{
-            settings[id] = document.getElementById(id).value;
+            settings[id] = value;
             window.localStorage.setItem(
               'Tubes-2D3D.htm-' + id,
               settings[id]
@@ -290,14 +292,15 @@ function save(){
         }
     }
 
-    if(document.getElementById('ms-per-frame').value == 30
-      || isNaN(document.getElementById('ms-per-frame').value)
-      || document.getElementById('ms-per-frame').value < 1){
+    var ms_per_frame = document.getElementById('ms-per-frame').value;
+    if(isNaN(ms_per_frame)
+      || ms_per_frame == 30
+      || ms_per_frame < 1){
         window.localStorage.removeItem('Tubes-2D3D.htm-ms-per-frame');
         settings['ms-per-frame'] = 30;
 
     }else{
-        settings['ms-per-frame'] = parseInt(document.getElementById('ms-per-frame').value);
+        settings['ms-per-frame'] = parseInt(ms_per_frame);
         window.localStorage.setItem(
           'Tubes-2D3D.htm-ms-per-frame',
           settings['ms-per-frame']
