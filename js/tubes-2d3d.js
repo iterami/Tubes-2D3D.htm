@@ -230,11 +230,16 @@ function reset(){
         return;
     }
 
-    document.getElementById('audio-volume').value = 1;
-    document.getElementById('key-slowdown').value = 'S';
-    document.getElementById('key-speedup').value = 'W';
-    document.getElementById('movement-keys').value = 'AD';
-    document.getElementById('ms-per-frame').value = 30;
+    var ids = {
+      'audio-volume': 1,
+      'key-slowdown': 'S',
+      'key-speedup': 'W',
+      'movement-keys': 'AD',
+      'ms-per-frame': 30,
+    };
+    for(var id in ids){
+        document.getElementById(id).value = ids[id];
+    }
 
     save();
 }
