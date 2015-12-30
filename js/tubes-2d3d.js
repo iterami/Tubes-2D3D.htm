@@ -284,12 +284,12 @@ function save(){
     };
     for(var id in ids){
         var value = document.getElementById(id).value;
+        settings[id] = value;
+
         if(value === ids[id]){
             window.localStorage.removeItem('Tubes-2D3D.htm-' + id);
-            settings[id] = ids[id];
 
         }else{
-            settings[id] = value;
             window.localStorage.setItem(
               'Tubes-2D3D.htm-' + id,
               settings[id]
