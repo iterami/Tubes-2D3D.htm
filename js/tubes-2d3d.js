@@ -302,7 +302,10 @@ function save(){
         settings['ms-per-frame'] = 30;
 
     }else{
-        settings['ms-per-frame'] = parseInt(ms_per_frame);
+        settings['ms-per-frame'] = parseInt(
+          ms_per_frame,
+          10
+        );
         window.localStorage.setItem(
           'Tubes-2D3D.htm-ms-per-frame',
           settings['ms-per-frame']
@@ -402,7 +405,7 @@ var settings = {
   'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') || 'S',
   'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') || 'W',
   'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') || 'AD',
-  'ms-per-frame': parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame')) || 30,
+  'ms-per-frame': parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame'), 10) || 30,
 };
 var speed = 0;
 var wall_splits = [];
