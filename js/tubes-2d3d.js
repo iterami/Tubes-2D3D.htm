@@ -1,13 +1,6 @@
 'use strict';
 
-function draw(){
-    buffer.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-
+function draw_logic(){
     // Save current buffer state.
     buffer.save();
 
@@ -133,20 +126,6 @@ function draw(){
       5,
       25
     );
-
-    canvas.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-    canvas.drawImage(
-      document.getElementById('buffer'),
-      0,
-      0
-    );
-
-    animationFrame = window.requestAnimationFrame(draw);
 }
 
 function logic(){
@@ -244,21 +223,7 @@ function reset(){
     save();
 }
 
-function resize(){
-    if(mode <= 0){
-        return;
-    }
-
-    height = window.innerHeight;
-    document.getElementById('buffer').height = height;
-    document.getElementById('canvas').height = height;
-    y = height / 2;
-
-    width = window.innerWidth;
-    document.getElementById('buffer').width = width;
-    document.getElementById('canvas').width = width;
-    x = width / 2;
-
+function resize_logic(){
     buffer.font = '23pt sans-serif';
 }
 
@@ -313,14 +278,18 @@ function save(){
     }
 }
 
-function setmode(newmode){
-    window.cancelAnimationFrame(animationFrame);
-    window.clearInterval(interval);
-
-    mode = newmode;
+function setmode_logic(){
+    // Main menu mode.
+    if(mode === 0){
+        document.body.innerHTML = '<div><div><a onclick=setmode(1)>Enter the Tubes</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
+          + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
+          + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
+          + settings['key-speedup'] + '>Speed++</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
+          + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
+          + settings['ms-per-frame'] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
 
     // New game mode.
-    if(mode > 0){
+    }else{
         save();
 
         key_left = false;
@@ -329,23 +298,6 @@ function setmode(newmode){
         key_speedplus = false;
         speed = 10;
         rotation = 0;
-
-        document.body.innerHTML =
-          '<canvas id=canvas></canvas><canvas id=buffer></canvas>';
-
-        var contextAttributes = {
-          'alpha': false,
-        };
-        buffer = document.getElementById('buffer').getContext(
-          '2d',
-          contextAttributes
-        );
-        canvas = document.getElementById('canvas').getContext(
-          '2d',
-          contextAttributes
-        );
-
-        resize();
 
         wall_splits = [
           -2,
@@ -363,40 +315,15 @@ function setmode(newmode){
           ['#f0f', '#06f', '#ff0', '#f60'],// Initial
           ['#0f0', '#f00', '#00f', '#0ff'],// First swap
         ];
-
-        animationFrame = window.requestAnimationFrame(draw);
-        interval = window.setInterval(
-          logic,
-          settings['ms-per-frame']
-        );
-
-        return;
     }
-
-    // Main menu mode.
-    buffer = 0;
-    canvas = 0;
-
-    document.body.innerHTML = '<div><div><a onclick=setmode(1)>Enter the Tubes</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=movement-keys maxlength=2 value='
-      + settings['movement-keys'] + '>Move ←→<br><input id=key-slowdown maxlength=1 value='
-      + settings['key-slowdown'] + '>Speed--<br><input id=key-speedup maxlength=1 value='
-      + settings['key-speedup'] + '>Speed++</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
-      + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
-      + settings['ms-per-frame'] + '>ms/Frame<br><a onclick=reset()>Reset Settings</a></div></div>';
 }
 
-var animationFrame = 0;
-var buffer = 0;
-var canvas = 0;
 var colors = [];
 var degree = Math.PI / 180;
-var height = 0;
-var interval = 0;
 var key_left = false;
 var key_right = false;
 var key_speedminus = false;
 var key_speedplus = false;
-var mode = 0;
 var rotation = 0;
 var settings = {
   'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') !== null
@@ -409,9 +336,6 @@ var settings = {
 };
 var speed = 0;
 var wall_splits = [];
-var width = 0;
-var x = 0;
-var y = 0;
 
 window.onkeydown = function(e){
     if(mode <= 0){
@@ -459,8 +383,4 @@ window.onkeyup = function(e){
     }
 };
 
-window.onload = function(e){
-    setmode(0);
-};
-
-window.onresize = resize;
+window.onload = init_canvas;
