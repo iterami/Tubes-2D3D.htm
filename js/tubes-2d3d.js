@@ -204,78 +204,8 @@ function random_hex(){
       + choices.charAt(Math.floor(Math.random() * 16));
 }
 
-function reset(){
-    if(!window.confirm('Reset settings?')){
-        return;
-    }
-
-    var ids = {
-      'audio-volume': 1,
-      'key-slowdown': 'S',
-      'key-speedup': 'W',
-      'movement-keys': 'AD',
-      'ms-per-frame': 30,
-    };
-    for(var id in ids){
-        document.getElementById(id).value = ids[id];
-    }
-
-    save();
-}
-
 function resize_logic(){
     buffer.font = '23pt sans-serif';
-}
-
-// Save settings into window.localStorage if they differ from default.
-function save(){
-    settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
-    if(settings['audio-volume'] === 1){
-        window.localStorage.removeItem('Tubes-2D3D.htm-audio-volume');
-
-    }else{
-        window.localStorage.setItem(
-          'Tubes-2D3D.htm-audio-volume',
-          settings['audio-volume']
-        );
-    }
-
-    var ids = {
-      'key-slowdown': 'S',
-      'key-speedup': 'W',
-      'movement-keys': 'AD',
-    };
-    for(var id in ids){
-        settings[id] = document.getElementById(id).value;
-
-        if(settings[id] === ids[id]){
-            window.localStorage.removeItem('Tubes-2D3D.htm-' + id);
-
-        }else{
-            window.localStorage.setItem(
-              'Tubes-2D3D.htm-' + id,
-              settings[id]
-            );
-        }
-    }
-
-    var ms_per_frame = document.getElementById('ms-per-frame').value;
-    if(ms_per_frame == 30
-      || isNaN(ms_per_frame)
-      || ms_per_frame < 1){
-        window.localStorage.removeItem('Tubes-2D3D.htm-ms-per-frame');
-        settings['ms-per-frame'] = 30;
-
-    }else{
-        settings['ms-per-frame'] = parseInt(
-          ms_per_frame,
-          10
-        );
-        window.localStorage.setItem(
-          'Tubes-2D3D.htm-ms-per-frame',
-          settings['ms-per-frame']
-        );
-    }
 }
 
 function setmode_logic(newgame){
@@ -327,15 +257,6 @@ var key_right = false;
 var key_speedminus = false;
 var key_speedplus = false;
 var rotation = 0;
-var settings = {
-  'audio-volume': window.localStorage.getItem('Tubes-2D3D.htm-audio-volume') !== null
-    ? parseFloat(window.localStorage.getItem('Tubes-2D3D.htm-audio-volume'))
-    : 1,
-  'key-slowdown': window.localStorage.getItem('Tubes-2D3D.htm-key-slowdown') || 'S',
-  'key-speedup': window.localStorage.getItem('Tubes-2D3D.htm-key-speedup') || 'W',
-  'movement-keys': window.localStorage.getItem('Tubes-2D3D.htm-movement-keys') || 'AD',
-  'ms-per-frame': parseInt(window.localStorage.getItem('Tubes-2D3D.htm-ms-per-frame'), 10) || 30,
-};
 var speed = 0;
 var wall_splits = [];
 
@@ -385,4 +306,16 @@ window.onkeyup = function(e){
     }
 };
 
-window.onload = init_canvas;
+window.onload = function(){
+    init_settings(
+      'Tubes-2D3D.htm-',
+      {
+        'audio-volume': 1,
+        'key-slowdown': 'S',
+        'key-speedup': 'W',
+        'movement-keys': 'AD',
+        'ms-per-frame': 30,
+      }
+    );
+    init_canvas();
+};
