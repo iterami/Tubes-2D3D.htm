@@ -204,10 +204,6 @@ function random_hex(){
       + choices.charAt(Math.floor(Math.random() * 16));
 }
 
-function resize_logic(){
-    buffer.font = font;
-}
-
 function setmode_logic(newgame){
     // Main menu mode.
     if(mode === 0){
