@@ -214,13 +214,13 @@ function setmode_logic(newgame){
           + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<a onclick=reset()>Reset Settings</a></div></div>';
-        update_settings();
+          + '<a onclick=settings_reset()>Reset Settings</a></div></div>';
+        settings_update();
 
     // New game mode.
     }else{
         if(newgame){
-            save();
+            settings_save();
         }
 
         key_left = false;
@@ -274,16 +274,16 @@ window.onkeydown = function(e){
 
     key = String.fromCharCode(key);
 
-    if(key === settings['movement-keys'][0]){
+    if(key === settings_settings['movement-keys'][0]){
         key_left = true;
 
-    }else if(key === settings['movement-keys'][1]){
+    }else if(key === settings_settings['movement-keys'][1]){
         key_right = true;
 
-    }else if(key === settings['key-slowdown']){
+    }else if(key === settings_settings['key-slowdown']){
         key_speedminus = true;
 
-    }else if(key === settings['key-speedup']){
+    }else if(key === settings_settings['key-speedup']){
         key_speedplus = true;
     }
 };
@@ -291,22 +291,22 @@ window.onkeydown = function(e){
 window.onkeyup = function(e){
     var key = String.fromCharCode(e.keyCode || e.which);
 
-    if(key === settings['movement-keys'][0]){
+    if(key === settings_settings['movement-keys'][0]){
         key_left = false;
 
-    }else if(key === settings['movement-keys'][1]){
+    }else if(key === settings_settings['movement-keys'][1]){
         key_right = false;
 
-    }else if(key === settings['key-slowdown']){
+    }else if(key === settings_settings['key-slowdown']){
         key_speedminus = false;
 
-    }else if(key === settings['key-speedup']){
+    }else if(key === settings_settings['key-speedup']){
         key_speedplus = false;
     }
 };
 
 window.onload = function(){
-    init_settings(
+    settings_init(
       'Tubes-2D3D.htm-',
       {
         'audio-volume': 1,
