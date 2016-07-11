@@ -2,126 +2,126 @@
 
 function draw_logic(){
     // Save current buffer state.
-    buffer.save();
+    canvas_buffer.save();
 
     // Setup translate/rotation for wall drawing.
-    buffer.translate(
-      x,
-      y
+    canvas_buffer.translate(
+      canvas_x,
+      canvas_y
     );
-    buffer.rotate(rotation * degree);
+    canvas_buffer.rotate(rotation * degree);
 
     // Draw walls.
     var loop_counter = 3;
     do{
-        buffer.beginPath();
-        buffer.moveTo(
+        canvas_buffer.beginPath();
+        canvas_buffer.moveTo(
           0,
           0
         );
-        buffer.lineTo(
+        canvas_buffer.lineTo(
           wall_splits[[0,0,2,4,][loop_counter]],
           wall_splits[[1,1,3,5,][loop_counter]]
         );
-        buffer.lineTo(
+        canvas_buffer.lineTo(
           wall_splits[[2,4,6,6,][loop_counter]],
           wall_splits[[3,5,7,7,][loop_counter]]
         );
-        buffer.closePath();
-        buffer.fillStyle = colors[0][loop_counter];
-        buffer.fill();
+        canvas_buffer.closePath();
+        canvas_buffer.fillStyle = colors[0][loop_counter];
+        canvas_buffer.fill();
     }while(loop_counter--);
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      -x
+    canvas_buffer.beginPath();
+    canvas_buffer.moveTo(
+      -canvas_x,
+      -canvas_x
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[0],
       wall_splits[1]
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[2],
       wall_splits[3]
     );
-    buffer.lineTo(
-      x,
-      -x
+    canvas_buffer.lineTo(
+      canvas_x,
+      -canvas_x
     );
-    buffer.closePath();
-    buffer.fillStyle = colors[1][0];
-    buffer.fill();
+    canvas_buffer.closePath();
+    canvas_buffer.fillStyle = colors[1][0];
+    canvas_buffer.fill();
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      -x
+    canvas_buffer.beginPath();
+    canvas_buffer.moveTo(
+      -canvas_x,
+      -canvas_x
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[0],
       wall_splits[1]
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[4],
       wall_splits[5]
     );
-    buffer.lineTo(
-      -x,
-      x
+    canvas_buffer.lineTo(
+      -canvas_x,
+      canvas_x
     );
-    buffer.closePath();
-    buffer.fillStyle = colors[1][1];
-    buffer.fill();
+    canvas_buffer.closePath();
+    canvas_buffer.fillStyle = colors[1][1];
+    canvas_buffer.fill();
 
-    buffer.beginPath();
-    buffer.moveTo(
-      x,
-      -x
+    canvas_buffer.beginPath();
+    canvas_buffer.moveTo(
+      canvas_x,
+      -canvas_x
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[2],
       wall_splits[3]
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[6],
       wall_splits[7]
     );
-    buffer.lineTo(
-      x,
-      x
+    canvas_buffer.lineTo(
+      canvas_x,
+      canvas_x
     );
-    buffer.closePath();
-    buffer.fillStyle = colors[1][2];
-    buffer.fill();
+    canvas_buffer.closePath();
+    canvas_buffer.fillStyle = colors[1][2];
+    canvas_buffer.fill();
 
-    buffer.beginPath();
-    buffer.moveTo(
-      -x,
-      x
+    canvas_buffer.beginPath();
+    canvas_buffer.moveTo(
+      -canvas_x,
+      canvas_x
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[4],
       wall_splits[5]
     );
-    buffer.lineTo(
+    canvas_buffer.lineTo(
       wall_splits[6],
       wall_splits[7]
     );
-    buffer.lineTo(
-      x,
-      x
+    canvas_buffer.lineTo(
+      canvas_x,
+      canvas_x
     );
-    buffer.closePath();
-    buffer.fillStyle = colors[1][3];
-    buffer.fill();
+    canvas_buffer.closePath();
+    canvas_buffer.fillStyle = colors[1][3];
+    canvas_buffer.fill();
 
     // Restore buffer state.
-    buffer.restore();
+    canvas_buffer.restore();
 
     // Draw current speed.
-    buffer.fillStyle = '#fff';
-    buffer.fillText(
+    canvas_buffer.fillStyle = '#fff';
+    canvas_buffer.fillText(
       speed + ' m/s',
       5,
       25
@@ -157,8 +157,8 @@ function logic(){
           : -speed;
 
         // Check if wall split reached edge of screen.
-        if(wall_splits[loop_counter * 2] < -x
-          || wall_splits[loop_counter * 2] > x){
+        if(wall_splits[loop_counter * 2] < -canvas_x
+          || wall_splits[loop_counter * 2] > canvas_x){
             // Reset wall splits.
             wall_splits[loop_counter * 2] = [
               -2,
@@ -206,8 +206,8 @@ function random_hex(){
 
 function setmode_logic(newgame){
     // Main menu mode.
-    if(mode === 0){
-        document.body.innerHTML = '<div><div><a onclick=setmode(1,true)>Enter the Tubes</a></div></div>'
+    if(canvas_mode === 0){
+        document.body.innerHTML = '<div><div><a onclick=canvas_setmode(1,true)>Enter the Tubes</a></div></div>'
           + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
           + '<input id=movement-keys maxlength=2>Move ←→<br>'
           + '<input id=key-slowdown maxlength=1>Speed--<br>'
@@ -260,7 +260,7 @@ var speed = 0;
 var wall_splits = [];
 
 window.onkeydown = function(e){
-    if(mode <= 0){
+    if(canvas_mode <= 0){
         return;
     }
 
@@ -268,7 +268,7 @@ window.onkeydown = function(e){
 
     // ESC: return to main menu.
     if(key === 27){
-        setmode(0);
+        canvas_setmode(0);
         return;
     }
 
@@ -316,5 +316,5 @@ window.onload = function(){
         'ms-per-frame': 30,
       }
     );
-    init_canvas();
+    canvas_init();
 };
