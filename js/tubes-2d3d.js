@@ -196,14 +196,6 @@ function logic(){
     }
 }
 
-function random_hex(){
-    var choices = '0123456789abcdef';
-    return '#'
-      + choices.charAt(Math.floor(Math.random() * 16))
-      + choices.charAt(Math.floor(Math.random() * 16))
-      + choices.charAt(Math.floor(Math.random() * 16));
-}
-
 function setmode_logic(newgame){
     // Main menu mode.
     if(canvas_mode === 0){
