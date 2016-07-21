@@ -242,7 +242,6 @@ function setmode_logic(newgame){
 }
 
 var colors = [];
-var degree = Math.PI / 180;
 var key_left = false;
 var key_right = false;
 var key_speedminus = false;
