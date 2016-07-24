@@ -9,7 +9,7 @@ function draw_logic(){
       canvas_x,
       canvas_y
     );
-    canvas_buffer.rotate(rotation * degree);
+    canvas_buffer.rotate(rotation * math_degree);
 
     // Draw walls.
     var loop_counter = 3;
