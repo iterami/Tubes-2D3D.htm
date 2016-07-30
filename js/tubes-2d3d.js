@@ -129,6 +129,10 @@ function draw_logic(){
 }
 
 function logic(){
+    if(canvas_menu){
+        return;
+    }
+
     if(key_left){
         rotation -= speed / 10 + 1;
     }
@@ -200,7 +204,7 @@ function setmode_logic(newgame){
     // Main menu mode.
     if(canvas_mode === 0){
         document.body.innerHTML = '<div><div><a onclick=canvas_setmode(1,true)>Enter the Tubes</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
+          + '<div class=right><div><input disabled value=ESC>Menu<br>'
           + '<input id=movement-keys maxlength=2>Move ←→<br>'
           + '<input id=key-slowdown maxlength=1>Speed--<br>'
           + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
@@ -257,10 +261,9 @@ window.onkeydown = function(e){
 
     var key = e.keyCode || e.which;
 
-    // ESC: return to main menu.
+    // ESC: menu.
     if(key === 27){
-        canvas_setmode(0);
-        return;
+        canvas_menu_toggle();
     }
 
     key = String.fromCharCode(key);
@@ -276,6 +279,9 @@ window.onkeydown = function(e){
 
     }else if(key === settings_settings['key-speedup']){
         key_speedplus = true;
+
+    }else if(key === 'Q'){
+        canvas_menu_quit();
     }
 };
 
