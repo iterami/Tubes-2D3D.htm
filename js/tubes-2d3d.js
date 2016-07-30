@@ -264,6 +264,7 @@ window.onkeydown = function(e){
     // ESC: menu.
     if(key === 27){
         canvas_menu_toggle();
+        return;
     }
 
     key = String.fromCharCode(key);
