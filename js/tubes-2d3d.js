@@ -14,107 +14,124 @@ function draw_logic(){
     // Draw walls.
     var loop_counter = 3;
     do{
-        canvas_buffer.beginPath();
-        canvas_buffer.moveTo(
-          0,
-          0
+        canvas_draw_path(
+          [
+            {
+              'type': 'moveTo',
+              'x': 0,
+              'y': 0,
+            },
+            {
+              'x': wall_splits[[0,0,2,4,][loop_counter]],
+              'y': wall_splits[[1,1,3,5,][loop_counter]],
+            },
+            {
+              'x': wall_splits[[2,4,6,6,][loop_counter]],
+              'y': wall_splits[[3,5,7,7,][loop_counter]],
+            },
+          ],
+          {
+            'fillStyle': colors[0][loop_counter],
+          }
         );
-        canvas_buffer.lineTo(
-          wall_splits[[0,0,2,4,][loop_counter]],
-          wall_splits[[1,1,3,5,][loop_counter]]
-        );
-        canvas_buffer.lineTo(
-          wall_splits[[2,4,6,6,][loop_counter]],
-          wall_splits[[3,5,7,7,][loop_counter]]
-        );
-        canvas_buffer.closePath();
-        canvas_buffer.fillStyle = colors[0][loop_counter];
-        canvas_buffer.fill();
     }while(loop_counter--);
 
-    canvas_buffer.beginPath();
-    canvas_buffer.moveTo(
-      -canvas_x,
-      -canvas_x
+    canvas_draw_path(
+      [
+        {
+          'type': 'moveTo',
+          'x': -canvas_x,
+          'y': -canvas_x,
+        },
+        {
+          'x': wall_splits[0],
+          'y': wall_splits[1],
+        },
+        {
+          'x': wall_splits[2],
+          'y': wall_splits[3],
+        },
+        {
+          'x': canvas_x,
+          'y': -canvas_x,
+        },
+      ],
+      {
+        'fillStyle': colors[1][0],
+      }
     );
-    canvas_buffer.lineTo(
-      wall_splits[0],
-      wall_splits[1]
+    canvas_draw_path(
+      [
+        {
+          'type': 'moveTo',
+          'x': -canvas_x,
+          'y': -canvas_x,
+        },
+        {
+          'x': wall_splits[0],
+          'y': wall_splits[1],
+        },
+        {
+          'x': wall_splits[4],
+          'y': wall_splits[5],
+        },
+        {
+          'x': -canvas_x,
+          'y': canvas_x,
+        },
+      ],
+      {
+        'fillStyle': colors[1][1],
+      }
     );
-    canvas_buffer.lineTo(
-      wall_splits[2],
-      wall_splits[3]
+    canvas_draw_path(
+      [
+        {
+          'type': 'moveTo',
+          'x': canvas_x,
+          'y': -canvas_x,
+        },
+        {
+          'x': wall_splits[2],
+          'y': wall_splits[3],
+        },
+        {
+          'x': wall_splits[6],
+          'y': wall_splits[7],
+        },
+        {
+          'x': canvas_x,
+          'y': canvas_x,
+        },
+      ],
+      {
+        'fillStyle': colors[1][2],
+      }
     );
-    canvas_buffer.lineTo(
-      canvas_x,
-      -canvas_x
+    canvas_draw_path(
+      [
+        {
+          'type': 'moveTo',
+          'x': -canvas_x,
+          'y': canvas_x,
+        },
+        {
+          'x': wall_splits[4],
+          'y': wall_splits[5],
+        },
+        {
+          'x': wall_splits[6],
+          'y': wall_splits[7],
+        },
+        {
+          'x': canvas_x,
+          'y': canvas_x,
+        },
+      ],
+      {
+        'fillStyle': colors[1][3],
+      }
     );
-    canvas_buffer.closePath();
-    canvas_buffer.fillStyle = colors[1][0];
-    canvas_buffer.fill();
-
-    canvas_buffer.beginPath();
-    canvas_buffer.moveTo(
-      -canvas_x,
-      -canvas_x
-    );
-    canvas_buffer.lineTo(
-      wall_splits[0],
-      wall_splits[1]
-    );
-    canvas_buffer.lineTo(
-      wall_splits[4],
-      wall_splits[5]
-    );
-    canvas_buffer.lineTo(
-      -canvas_x,
-      canvas_x
-    );
-    canvas_buffer.closePath();
-    canvas_buffer.fillStyle = colors[1][1];
-    canvas_buffer.fill();
-
-    canvas_buffer.beginPath();
-    canvas_buffer.moveTo(
-      canvas_x,
-      -canvas_x
-    );
-    canvas_buffer.lineTo(
-      wall_splits[2],
-      wall_splits[3]
-    );
-    canvas_buffer.lineTo(
-      wall_splits[6],
-      wall_splits[7]
-    );
-    canvas_buffer.lineTo(
-      canvas_x,
-      canvas_x
-    );
-    canvas_buffer.closePath();
-    canvas_buffer.fillStyle = colors[1][2];
-    canvas_buffer.fill();
-
-    canvas_buffer.beginPath();
-    canvas_buffer.moveTo(
-      -canvas_x,
-      canvas_x
-    );
-    canvas_buffer.lineTo(
-      wall_splits[4],
-      wall_splits[5]
-    );
-    canvas_buffer.lineTo(
-      wall_splits[6],
-      wall_splits[7]
-    );
-    canvas_buffer.lineTo(
-      canvas_x,
-      canvas_x
-    );
-    canvas_buffer.closePath();
-    canvas_buffer.fillStyle = colors[1][3];
-    canvas_buffer.fill();
 
     // Restore buffer state.
     canvas_buffer.restore();
