@@ -321,15 +321,15 @@ window.onkeyup = function(e){
 };
 
 window.onload = function(){
-    settings_init(
-      'Tubes-2D3D.htm-',
-      {
+    settings_init({
+      'prefix': 'Tubes-2D3D.htm-',
+      'settings': {
         'audio-volume': 1,
         'key-slowdown': 'S',
         'key-speedup': 'W',
         'movement-keys': 'AD',
         'ms-per-frame': 30,
-      }
-    );
+      },
+    });
     canvas_init();
 };
