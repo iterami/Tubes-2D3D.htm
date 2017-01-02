@@ -14,8 +14,11 @@ function draw_logic(){
     // Draw walls.
     var loop_counter = 3;
     do{
-        canvas_draw_path(
-          [
+        canvas_draw_path({
+          'properties': {
+            'fillStyle': colors[0][loop_counter],
+          },
+          'vertices': [
             {
               'type': 'moveTo',
               'x': 0,
@@ -30,38 +33,38 @@ function draw_logic(){
               'y': wall_splits[[3,5,7,7,][loop_counter]],
             },
           ],
-          {
-            'fillStyle': colors[0][loop_counter],
-          }
-        );
+        });
     }while(loop_counter--);
 
-    canvas_draw_path(
-      [
-        {
-          'type': 'moveTo',
-          'x': -canvas_x,
-          'y': -canvas_x,
-        },
-        {
-          'x': wall_splits[0],
-          'y': wall_splits[1],
-        },
-        {
-          'x': wall_splits[2],
-          'y': wall_splits[3],
-        },
-        {
-          'x': canvas_x,
-          'y': -canvas_x,
-        },
-      ],
-      {
+    canvas_draw_path({
+      'properties': {
         'fillStyle': colors[1][0],
-      }
-    );
-    canvas_draw_path(
-      [
+      },
+      'vertices': [
+        {
+          'type': 'moveTo',
+          'x': -canvas_x,
+          'y': -canvas_x,
+        },
+        {
+          'x': wall_splits[0],
+          'y': wall_splits[1],
+        },
+        {
+          'x': wall_splits[2],
+          'y': wall_splits[3],
+        },
+        {
+          'x': canvas_x,
+          'y': -canvas_x,
+        },
+      ],
+    });
+    canvas_draw_path({
+      'properties': {
+        'fillStyle': colors[1][1],
+      },
+      'vertices': [
         {
           'type': 'moveTo',
           'x': -canvas_x,
@@ -80,12 +83,12 @@ function draw_logic(){
           'y': canvas_x,
         },
       ],
-      {
-        'fillStyle': colors[1][1],
-      }
-    );
-    canvas_draw_path(
-      [
+    });
+    canvas_draw_path({
+      'properties': {
+        'fillStyle': colors[1][2],
+      },
+      'vertices': [
         {
           'type': 'moveTo',
           'x': canvas_x,
@@ -104,12 +107,12 @@ function draw_logic(){
           'y': canvas_x,
         },
       ],
-      {
-        'fillStyle': colors[1][2],
-      }
-    );
-    canvas_draw_path(
-      [
+    });
+    canvas_draw_path({
+      'properties': {
+        'fillStyle': colors[1][3],
+      },
+      'vertices': [
         {
           'type': 'moveTo',
           'x': -canvas_x,
@@ -128,10 +131,7 @@ function draw_logic(){
           'y': canvas_x,
         },
       ],
-      {
-        'fillStyle': colors[1][3],
-      }
-    );
+    });
 
     // Restore buffer state.
     canvas_buffer.restore();
@@ -220,7 +220,7 @@ function logic(){
 function setmode_logic(newgame){
     // Main menu mode.
     if(canvas_mode === 0){
-        document.body.innerHTML = '<div><div><a onclick=canvas_setmode(1,true)>Enter the Tubes</a></div></div>'
+        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a></div></div>'
           + '<div class=right><div><input disabled value=ESC>Menu<br>'
           + '<input id=movement-keys maxlength=2>Move ←→<br>'
           + '<input id=key-slowdown maxlength=1>Speed--<br>'
