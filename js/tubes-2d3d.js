@@ -271,55 +271,6 @@ var rotation = 0;
 var speed = 0;
 var wall_splits = [];
 
-window.onkeydown = function(e){
-    if(canvas_mode <= 0){
-        return;
-    }
-
-    var key = e.keyCode || e.which;
-
-    // ESC: menu.
-    if(key === 27){
-        canvas_menu_toggle();
-        return;
-    }
-
-    key = String.fromCharCode(key);
-
-    if(key === settings_settings['movement-keys'][0]){
-        key_left = true;
-
-    }else if(key === settings_settings['movement-keys'][1]){
-        key_right = true;
-
-    }else if(key === settings_settings['key-slowdown']){
-        key_speedminus = true;
-
-    }else if(key === settings_settings['key-speedup']){
-        key_speedplus = true;
-
-    }else if(key === 'Q'){
-        canvas_menu_quit();
-    }
-};
-
-window.onkeyup = function(e){
-    var key = String.fromCharCode(e.keyCode || e.which);
-
-    if(key === settings_settings['movement-keys'][0]){
-        key_left = false;
-
-    }else if(key === settings_settings['movement-keys'][1]){
-        key_right = false;
-
-    }else if(key === settings_settings['key-slowdown']){
-        key_speedminus = false;
-
-    }else if(key === settings_settings['key-speedup']){
-        key_speedplus = false;
-    }
-};
-
 window.onload = function(){
     settings_init({
       'prefix': 'Tubes-2D3D.htm-',
@@ -332,4 +283,53 @@ window.onload = function(){
       },
     });
     canvas_init();
+
+    window.onkeydown = function(e){
+        if(canvas_mode <= 0){
+            return;
+        }
+
+        var key = e.keyCode || e.which;
+
+        // ESC: menu.
+        if(key === 27){
+            canvas_menu_toggle();
+            return;
+        }
+
+        key = String.fromCharCode(key);
+
+        if(key === settings_settings['movement-keys'][0]){
+            key_left = true;
+
+        }else if(key === settings_settings['movement-keys'][1]){
+            key_right = true;
+
+        }else if(key === settings_settings['key-slowdown']){
+            key_speedminus = true;
+
+        }else if(key === settings_settings['key-speedup']){
+            key_speedplus = true;
+
+        }else if(key === 'Q'){
+            canvas_menu_quit();
+        }
+    };
+
+    window.onkeyup = function(e){
+        var key = String.fromCharCode(e.keyCode || e.which);
+
+        if(key === settings_settings['movement-keys'][0]){
+            key_left = false;
+
+        }else if(key === settings_settings['movement-keys'][1]){
+            key_right = false;
+
+        }else if(key === settings_settings['key-slowdown']){
+            key_speedminus = false;
+
+        }else if(key === settings_settings['key-speedup']){
+            key_speedplus = false;
+        }
+    };
 };
