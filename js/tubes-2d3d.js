@@ -227,13 +227,13 @@ function setmode_logic(newgame){
           + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<a onclick=settings_reset()>Reset Settings</a></div></div>';
-        settings_update();
+          + '<a onclick=storage_reset()>Reset Settings</a></div></div>';
+        storage_update();
 
     // New game mode.
     }else{
         if(newgame){
-            settings_save();
+            storage_save();
         }
 
         key_left = false;
@@ -272,15 +272,15 @@ var speed = 0;
 var wall_splits = [];
 
 window.onload = function(){
-    settings_init({
-      'prefix': 'Tubes-2D3D.htm-',
-      'settings': {
+    storage_init({
+      'data': {
         'audio-volume': 1,
         'key-slowdown': 'S',
         'key-speedup': 'W',
         'movement-keys': 'AD',
         'ms-per-frame': 30,
       },
+      'prefix': 'Tubes-2D3D.htm-',
     });
     canvas_init();
 
@@ -299,16 +299,16 @@ window.onload = function(){
 
         key = String.fromCharCode(key);
 
-        if(key === settings_settings['movement-keys'][0]){
+        if(key === storage_data['movement-keys'][0]){
             key_left = true;
 
-        }else if(key === settings_settings['movement-keys'][1]){
+        }else if(key === storage_data['movement-keys'][1]){
             key_right = true;
 
-        }else if(key === settings_settings['key-slowdown']){
+        }else if(key === storage_data['key-slowdown']){
             key_speedminus = true;
 
-        }else if(key === settings_settings['key-speedup']){
+        }else if(key === storage_data['key-speedup']){
             key_speedplus = true;
 
         }else if(key === 'Q'){
@@ -319,16 +319,16 @@ window.onload = function(){
     window.onkeyup = function(e){
         var key = String.fromCharCode(e.keyCode || e.which);
 
-        if(key === settings_settings['movement-keys'][0]){
+        if(key === storage_data['movement-keys'][0]){
             key_left = false;
 
-        }else if(key === settings_settings['movement-keys'][1]){
+        }else if(key === storage_data['movement-keys'][1]){
             key_right = false;
 
-        }else if(key === settings_settings['key-slowdown']){
+        }else if(key === storage_data['key-slowdown']){
             key_speedminus = false;
 
-        }else if(key === settings_settings['key-speedup']){
+        }else if(key === storage_data['key-speedup']){
             key_speedplus = false;
         }
     };
