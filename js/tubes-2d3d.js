@@ -165,23 +165,25 @@ function logic(){
         speed += 1;
     }
 
-    var do_split = 0;
+    var do_split = false;
 
     // Move wall split location.
     var loop_counter = 3;
     do{
-        wall_splits[loop_counter * 2] += wall_splits[loop_counter * 2] >= 0
+        var double = loop_counter * 2;
+
+        wall_splits[double] += wall_splits[double] >= 0
           ? speed
           : -speed;
-        wall_splits[loop_counter * 2 + 1] += wall_splits[loop_counter * 2 + 1] >= 0
+        wall_splits[double + 1] += wall_splits[double + 1] >= 0
           ? speed
           : -speed;
 
         // Check if wall split reached edge of screen.
-        if(wall_splits[loop_counter * 2] < -canvas_x
-          || wall_splits[loop_counter * 2] > canvas_x){
+        if(wall_splits[double] < -canvas_x
+          || wall_splits[double] > canvas_x){
             // Reset wall splits.
-            wall_splits[loop_counter * 2] = [
+            wall_splits[double] = [
               -2,
               -2,
               2,
@@ -190,8 +192,8 @@ function logic(){
               2,
               2,
               2,
-            ][loop_counter * 2];
-            wall_splits[loop_counter * 2 + 1] = [
+            ][double];
+            wall_splits[double + 1] = [
               -2,
               -2,
               2,
@@ -200,9 +202,9 @@ function logic(){
               2,
               2,
               2,
-            ][loop_counter * 2 + 1];
+            ][double + 1];
 
-            do_split = 1;
+            do_split = true;
         }
     }while(loop_counter--);
 
