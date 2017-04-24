@@ -146,10 +146,6 @@ function draw_logic(){
 }
 
 function logic(){
-    if(core_menu_open){
-        return;
-    }
-
     if(key_left){
         rotation -= speed / 10 + 1;
     }
