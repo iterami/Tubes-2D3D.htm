@@ -207,10 +207,10 @@ function logic(){
     if(do_split){
         colors[1] = colors[0];
         colors[0] = [
-          '#' + random_hex(),
-          '#' + random_hex(),
-          '#' + random_hex(),
-          '#' + random_hex(),
+          '#' + core_random_hex(),
+          '#' + core_random_hex(),
+          '#' + core_random_hex(),
+          '#' + core_random_hex(),
         ];
     }
 }
