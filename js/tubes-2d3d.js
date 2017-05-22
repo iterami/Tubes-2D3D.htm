@@ -225,13 +225,13 @@ function setmode_logic(newgame){
           + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<a onclick=storage_reset()>Reset Settings</a></div></div>';
-        storage_update();
+          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
+        core_storage_update();
 
     // New game mode.
     }else{
         if(newgame){
-            storage_save();
+            core_storage_save();
         }
 
         key_left = false;
@@ -270,7 +270,7 @@ var speed = 0;
 var wall_splits = [];
 
 window.onload = function(){
-    storage_init({
+    core_storage_init({
       'data': {
         'audio-volume': 1,
         'key-slowdown': 'S',
@@ -297,16 +297,16 @@ window.onload = function(){
 
         key = String.fromCharCode(key);
 
-        if(key === storage_data['movement-keys'][0]){
+        if(key === core_storage_data['movement-keys'][0]){
             key_left = true;
 
-        }else if(key === storage_data['movement-keys'][1]){
+        }else if(key === core_storage_data['movement-keys'][1]){
             key_right = true;
 
-        }else if(key === storage_data['key-slowdown']){
+        }else if(key === core_storage_data['key-slowdown']){
             key_speedminus = true;
 
-        }else if(key === storage_data['key-speedup']){
+        }else if(key === core_storage_data['key-speedup']){
             key_speedplus = true;
 
         }else if(key === 'Q'){
@@ -317,16 +317,16 @@ window.onload = function(){
     window.onkeyup = function(e){
         var key = String.fromCharCode(e.keyCode || e.which);
 
-        if(key === storage_data['movement-keys'][0]){
+        if(key === core_storage_data['movement-keys'][0]){
             key_left = false;
 
-        }else if(key === storage_data['movement-keys'][1]){
+        }else if(key === core_storage_data['movement-keys'][1]){
             key_right = false;
 
-        }else if(key === storage_data['key-slowdown']){
+        }else if(key === core_storage_data['key-slowdown']){
             key_speedminus = false;
 
-        }else if(key === storage_data['key-speedup']){
+        }else if(key === core_storage_data['key-speedup']){
             key_speedplus = false;
         }
     };
