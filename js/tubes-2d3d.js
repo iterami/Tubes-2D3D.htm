@@ -215,61 +215,7 @@ function logic(){
     }
 }
 
-function setmode_logic(newgame){
-    // Main menu mode.
-    if(canvas_mode === 0){
-        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Menu<br>'
-          + '<input id=movement-keys maxlength=2>Move ←→<br>'
-          + '<input id=key-slowdown maxlength=1>Speed--<br>'
-          + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
-          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
-          + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
-        core_storage_update();
-
-    // New game mode.
-    }else{
-        if(newgame){
-            core_storage_save();
-        }
-
-        key_left = false;
-        key_right = false;
-        key_speedminus = false;
-        key_speedplus = false;
-        speed = 10;
-        rotation = 0;
-
-        wall_splits = [
-          -2,
-          -2,
-          2,
-          -2,
-          -2,
-          2,
-          2,
-          2,
-        ];
-
-        // Set initial tube colors.
-        colors = [
-          ['#f0f', '#06f', '#ff0', '#f60'],// Initial
-          ['#0f0', '#f00', '#00f', '#0ff'],// First swap
-        ];
-    }
-}
-
-var colors = [];
-var key_left = false;
-var key_right = false;
-var key_speedminus = false;
-var key_speedplus = false;
-var rotation = 0;
-var speed = 0;
-var wall_splits = [];
-
-window.onload = function(){
+function repo_init(){
     core_storage_init({
       'data': {
         'audio-volume': 1,
@@ -330,4 +276,58 @@ window.onload = function(){
             key_speedplus = false;
         }
     };
-};
+}
+
+function setmode_logic(newgame){
+    // Main menu mode.
+    if(canvas_mode === 0){
+        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a></div></div>'
+          + '<div class=right><div><input disabled value=ESC>Menu<br>'
+          + '<input id=movement-keys maxlength=2>Move ←→<br>'
+          + '<input id=key-slowdown maxlength=1>Speed--<br>'
+          + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
+          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
+          + '<input id=ms-per-frame>ms/Frame<br>'
+          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
+        core_storage_update();
+
+    // New game mode.
+    }else{
+        if(newgame){
+            core_storage_save();
+        }
+
+        key_left = false;
+        key_right = false;
+        key_speedminus = false;
+        key_speedplus = false;
+        speed = 10;
+        rotation = 0;
+
+        wall_splits = [
+          -2,
+          -2,
+          2,
+          -2,
+          -2,
+          2,
+          2,
+          2,
+        ];
+
+        // Set initial tube colors.
+        colors = [
+          ['#f0f', '#06f', '#ff0', '#f60'],// Initial
+          ['#0f0', '#f00', '#00f', '#0ff'],// First swap
+        ];
+    }
+}
+
+var colors = [];
+var key_left = false;
+var key_right = false;
+var key_speedminus = false;
+var key_speedplus = false;
+var rotation = 0;
+var speed = 0;
+var wall_splits = [];
