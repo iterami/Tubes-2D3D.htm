@@ -216,15 +216,15 @@ function logic(){
 }
 
 function repo_init(){
-    core_storage_init({
-      'data': {
+    core_repo_init({
+      'storage': {
         'audio-volume': 1,
         'key-slowdown': 'S',
         'key-speedup': 'W',
         'movement-keys': 'AD',
         'ms-per-frame': 30,
       },
-      'prefix': 'Tubes-2D3D.htm-',
+      'title': 'Tubes-2D3D.htm',
     });
     canvas_init();
 
