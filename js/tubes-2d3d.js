@@ -146,18 +146,17 @@ function draw_logic(){
 }
 
 function logic(){
-    if(key_left){
+    if(core_keys[65]['state']){
         rotation -= speed / 10 + 1;
     }
-    if(key_right){
+    if(core_keys[68]['state']){
         rotation += speed / 10 + 1;
     }
-
-    if(key_speedminus
+    if(core_keys[83]['state']
       && speed > 0){
         speed -= 1;
     }
-    if(key_speedplus){
+    if(core_keys[87]['state']){
         speed += 1;
     }
 
@@ -217,65 +216,22 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
+      'keybinds': {
+        65: {},
+        68: {},
+        81: {
+          'todo': canvas_menu_quit,
+        },
+        83: {},
+        87: {},
+      },
       'storage': {
         'audio-volume': 1,
-        'key-slowdown': 'S',
-        'key-speedup': 'W',
-        'movement-keys': 'AD',
         'ms-per-frame': 30,
       },
       'title': 'Tubes-2D3D.htm',
     });
     canvas_init();
-
-    window.onkeydown = function(e){
-        if(canvas_mode <= 0){
-            return;
-        }
-
-        var key = e.keyCode || e.which;
-
-        // ESC: menu.
-        if(key === 27){
-            core_escape();
-            return;
-        }
-
-        key = String.fromCharCode(key);
-
-        if(key === core_storage_data['movement-keys'][0]){
-            key_left = true;
-
-        }else if(key === core_storage_data['movement-keys'][1]){
-            key_right = true;
-
-        }else if(key === core_storage_data['key-slowdown']){
-            key_speedminus = true;
-
-        }else if(key === core_storage_data['key-speedup']){
-            key_speedplus = true;
-
-        }else if(key === 'Q'){
-            canvas_menu_quit();
-        }
-    };
-
-    window.onkeyup = function(e){
-        var key = String.fromCharCode(e.keyCode || e.which);
-
-        if(key === core_storage_data['movement-keys'][0]){
-            key_left = false;
-
-        }else if(key === core_storage_data['movement-keys'][1]){
-            key_right = false;
-
-        }else if(key === core_storage_data['key-slowdown']){
-            key_speedminus = false;
-
-        }else if(key === core_storage_data['key-speedup']){
-            key_speedplus = false;
-        }
-    };
 }
 
 function setmode_logic(newgame){
@@ -283,9 +239,6 @@ function setmode_logic(newgame){
     if(canvas_mode === 0){
         document.getElementById('wrap').innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a></div></div>'
           + '<div class=right><div><input disabled value=ESC>Menu<br>'
-          + '<input id=movement-keys maxlength=2>Move ←→<br>'
-          + '<input id=key-slowdown maxlength=1>Speed--<br>'
-          + '<input id=key-speedup maxlength=1>Speed++</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
           + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
@@ -297,10 +250,6 @@ function setmode_logic(newgame){
             core_storage_save();
         }
 
-        key_left = false;
-        key_right = false;
-        key_speedminus = false;
-        key_speedplus = false;
         speed = 10;
         rotation = 0;
 
@@ -324,10 +273,6 @@ function setmode_logic(newgame){
 }
 
 var colors = [];
-var key_left = false;
-var key_right = false;
-var key_speedminus = false;
-var key_speedplus = false;
 var rotation = 0;
 var speed = 0;
 var wall_splits = [];
