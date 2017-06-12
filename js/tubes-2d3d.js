@@ -216,6 +216,7 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
+      'info': '<a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a>',
       'keybinds': {
         65: {},
         68: {},
@@ -225,51 +226,15 @@ function repo_init(){
         83: {},
         87: {},
       },
+      'menu': true,
       'storage': {
         'audio-volume': 1,
         'ms-per-frame': 30,
       },
+      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><input id=ms-per-frame>ms/Frame',
       'title': 'Tubes-2D3D.htm',
     });
     canvas_init();
-}
-
-function setmode_logic(newgame){
-    // Main menu mode.
-    if(canvas_mode === 0){
-        document.getElementById('wrap').innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Enter the Tubes</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Menu<br>'
-          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
-          + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
-        core_storage_update();
-
-    // New game mode.
-    }else{
-        if(newgame){
-            core_storage_save();
-        }
-
-        speed = 10;
-        rotation = 0;
-
-        wall_splits = [
-          -2,
-          -2,
-          2,
-          -2,
-          -2,
-          2,
-          2,
-          2,
-        ];
-
-        // Set initial tube colors.
-        colors = [
-          ['#f0f', '#06f', '#ff0', '#f60'],// Initial
-          ['#0f0', '#f00', '#00f', '#0ff'],// First swap
-        ];
-    }
 }
 
 var colors = [];
