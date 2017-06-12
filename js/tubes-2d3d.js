@@ -220,9 +220,6 @@ function repo_init(){
       'keybinds': {
         65: {},
         68: {},
-        81: {
-          'todo': canvas_menu_quit,
-        },
         83: {},
         87: {},
       },
