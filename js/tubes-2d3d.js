@@ -225,10 +225,9 @@ function repo_init(){
       },
       'menu': true,
       'storage': {
-        'audio-volume': 1,
         'ms-per-frame': 30,
       },
-      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><input id=ms-per-frame>ms/Frame',
+      'storage-menu': '<input id=ms-per-frame>ms/Frame',
       'title': 'Tubes-2D3D.htm',
     });
     canvas_init();
