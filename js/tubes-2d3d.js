@@ -224,10 +224,6 @@ function repo_init(){
         87: {},
       },
       'menu': true,
-      'storage': {
-        'ms-per-frame': 30,
-      },
-      'storage-menu': '<input id=ms-per-frame>ms/Frame',
       'title': 'Tubes-2D3D.htm',
     });
     canvas_init();
