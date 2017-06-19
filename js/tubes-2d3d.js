@@ -216,7 +216,7 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
-      'info': '<input onclick=canvas_setmode({mode:1,newgame:true}) type=button value="Enter the Tubes">',
+      'info': '<input onclick=canvas_setmode({newgame:true}) type=button value="Enter the Tubes">',
       'keybinds': {
         65: {},
         68: {},
