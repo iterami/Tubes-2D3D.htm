@@ -135,14 +135,6 @@ function draw_logic(){
 
     // Restore buffer state.
     canvas_buffer.restore();
-
-    // Draw current speed.
-    canvas_buffer.fillStyle = '#fff';
-    canvas_buffer.fillText(
-      speed + ' m/s',
-      5,
-      25
-    );
 }
 
 function logic(){
@@ -212,6 +204,12 @@ function logic(){
           '#' + core_random_hex(),
         ];
     }
+
+    core_ui_update({
+      'ids': {
+        'speed': speed,
+      },
+    });
 }
 
 function repo_init(){
@@ -225,6 +223,7 @@ function repo_init(){
       },
       'menu': true,
       'title': 'Tubes-2D3D.htm',
+      'ui': '<input id=ui-speed>m/s',
     });
     canvas_init();
 }
