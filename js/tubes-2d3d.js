@@ -21,8 +21,6 @@ function draw_logic(){
           'vertices': [
             {
               'type': 'moveTo',
-              'x': 0,
-              'y': 0,
             },
             {
               'x': wall_splits[[0,0,2,4,][loop_counter]],
