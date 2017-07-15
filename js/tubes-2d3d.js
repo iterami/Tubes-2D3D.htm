@@ -221,7 +221,7 @@ function repo_init(){
       },
       'menu': true,
       'title': 'Tubes-2D3D.htm',
-      'ui': '<input id=ui-speed>m/s',
+      'ui': '<span id=ui-speed></span> m/s',
     });
     canvas_init();
 }
