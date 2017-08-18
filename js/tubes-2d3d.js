@@ -212,7 +212,17 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
-      'info': '<input onclick=canvas_setmode({newgame:true}) type=button value="Enter the Tubes">',
+      'info': '<input id=enter type=button value="Enter the Tubes">',
+      'info-events': {
+        'enter': {
+          'todo': function(){
+              canvas_setmode({
+                'newgame': true,
+              });
+          },
+          'type': 'onclick',
+        },
+      },
       'keybinds': {
         65: {},
         68: {},
