@@ -6,8 +6,8 @@ function draw_logic(){
 
     // Setup translate/rotation for wall drawing.
     canvas_buffer.translate(
-      canvas_x,
-      canvas_y
+      canvas_properties['width-half'],
+      canvas_properties['height-half']
     );
     canvas_buffer.rotate(rotation * math_degree);
 
@@ -41,8 +41,8 @@ function draw_logic(){
       'vertices': [
         {
           'type': 'moveTo',
-          'x': -canvas_x,
-          'y': -canvas_x,
+          'x': -canvas_properties['width-half'],
+          'y': -canvas_properties['width-half'],
         },
         {
           'x': wall_splits[0],
@@ -53,8 +53,8 @@ function draw_logic(){
           'y': wall_splits[3],
         },
         {
-          'x': canvas_x,
-          'y': -canvas_x,
+          'x': canvas_properties['width-half'],
+          'y': -canvas_properties['width-half'],
         },
       ],
     });
@@ -65,8 +65,8 @@ function draw_logic(){
       'vertices': [
         {
           'type': 'moveTo',
-          'x': -canvas_x,
-          'y': -canvas_x,
+          'x': -canvas_properties['width-half'],
+          'y': -canvas_properties['width-half'],
         },
         {
           'x': wall_splits[0],
@@ -77,8 +77,8 @@ function draw_logic(){
           'y': wall_splits[5],
         },
         {
-          'x': -canvas_x,
-          'y': canvas_x,
+          'x': -canvas_properties['width-half'],
+          'y': canvas_properties['width-half'],
         },
       ],
     });
@@ -89,8 +89,8 @@ function draw_logic(){
       'vertices': [
         {
           'type': 'moveTo',
-          'x': canvas_x,
-          'y': -canvas_x,
+          'x': canvas_properties['width-half'],
+          'y': -canvas_properties['width-half'],
         },
         {
           'x': wall_splits[2],
@@ -101,8 +101,8 @@ function draw_logic(){
           'y': wall_splits[7],
         },
         {
-          'x': canvas_x,
-          'y': canvas_x,
+          'x': canvas_properties['width-half'],
+          'y': canvas_properties['width-half'],
         },
       ],
     });
@@ -113,8 +113,8 @@ function draw_logic(){
       'vertices': [
         {
           'type': 'moveTo',
-          'x': -canvas_x,
-          'y': canvas_x,
+          'x': -canvas_properties['width-half'],
+          'y': canvas_properties['width-half'],
         },
         {
           'x': wall_splits[4],
@@ -125,8 +125,8 @@ function draw_logic(){
           'y': wall_splits[7],
         },
         {
-          'x': canvas_x,
-          'y': canvas_x,
+          'x': canvas_properties['width-half'],
+          'y': canvas_properties['width-half'],
         },
       ],
     });
@@ -165,8 +165,8 @@ function logic(){
           : -speed;
 
         // Check if wall split reached edge of screen.
-        if(wall_splits[double] < -canvas_x
-          || wall_splits[double] > canvas_x){
+        if(wall_splits[double] < -canvas_properties['width-half']
+          || wall_splits[double] > canvas_properties['width-half']){
             // Reset wall splits.
             wall_splits[double] = [
               -2,
