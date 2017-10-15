@@ -234,8 +234,3 @@ function repo_init(){
     });
     canvas_init();
 }
-
-var colors = [];
-var rotation = 0;
-var speed = 0;
-var wall_splits = [];
