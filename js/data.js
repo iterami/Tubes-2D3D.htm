@@ -21,8 +21,3 @@ function load_data(id){
       ['#0f0', '#f00', '#00f', '#0ff'],// First swap
     ];
 }
-
-var colors = [];
-var rotation = 0;
-var speed = 0;
-var wall_splits = [];

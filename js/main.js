@@ -212,6 +212,12 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
+      'globals': {
+        'colors': [],
+        'rotation': 0,
+        'speed': 0,
+        'wall_splits': [],
+      },
       'info': '<input id=enter type=button value="Enter the Tubes">',
       'info-events': {
         'enter': {
