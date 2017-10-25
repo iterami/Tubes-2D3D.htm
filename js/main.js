@@ -212,6 +212,15 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
+      'events': {
+        'enter': {
+          'onclick': function(){
+              canvas_setmode({
+                'newgame': true,
+              });
+          },
+        },
+      },
       'globals': {
         'colors': [],
         'rotation': 0,
@@ -219,15 +228,6 @@ function repo_init(){
         'wall_splits': [],
       },
       'info': '<input id=enter type=button value="Enter the Tubes">',
-      'info-events': {
-        'enter': {
-          'todo': function(){
-              canvas_setmode({
-                'newgame': true,
-              });
-          },
-        },
-      },
       'keybinds': {
         65: {},
         68: {},
