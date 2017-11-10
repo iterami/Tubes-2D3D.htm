@@ -136,17 +136,17 @@ function draw_logic(){
 }
 
 function logic(){
-    if(core_keys[65]['state']){
+    if(core_keys[core_storage_data['move-←']]['state']){
         rotation -= speed / 10 + 1;
     }
-    if(core_keys[68]['state']){
+    if(core_keys[core_storage_data['move-→']]['state']){
         rotation += speed / 10 + 1;
     }
-    if(core_keys[83]['state']
+    if(core_keys[core_storage_data['move-↓']]['state']
       && speed > 0){
         speed -= 1;
     }
-    if(core_keys[87]['state']){
+    if(core_keys[core_storage_data['move-↑']]['state']){
         speed += 1;
     }
 
@@ -228,12 +228,6 @@ function repo_init(){
         'wall_splits': [],
       },
       'info': '<input id=enter type=button value="Enter the Tubes">',
-      'keybinds': {
-        65: {},
-        68: {},
-        83: {},
-        87: {},
-      },
       'menu': true,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=ui-speed></span> m/s',
