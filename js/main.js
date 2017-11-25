@@ -9,7 +9,7 @@ function draw_logic(){
       canvas_properties['width-half'],
       canvas_properties['height-half']
     );
-    canvas_buffer.rotate(rotation * math_degree);
+    canvas_buffer.rotate(rotation * core_degree);
 
     // Draw walls.
     var loop_counter = 3;
