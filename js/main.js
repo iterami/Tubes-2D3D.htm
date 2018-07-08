@@ -12,7 +12,7 @@ function draw_logic(){
     canvas_buffer.rotate(rotation * core_degree);
 
     // Draw walls.
-    var loop_counter = 3;
+    let loop_counter = 3;
     do{
         canvas_draw_path({
           'properties': {
@@ -150,12 +150,12 @@ function logic(){
         speed += 1;
     }
 
-    var do_split = false;
+    let do_split = false;
 
     // Move wall split location.
-    var loop_counter = 3;
+    let loop_counter = 3;
     do{
-        var double = loop_counter * 2;
+        let double = loop_counter * 2;
 
         wall_splits[double] += wall_splits[double] >= 0
           ? speed
