@@ -230,7 +230,7 @@ function repo_init(){
       'info': '<input id=enter type=button value="Enter the Tubes">',
       'menu': true,
       'title': 'Tubes-2D3D.htm',
-      'ui': '<span id=ui-speed></span> m/s',
+      'ui': '<span id=speed></span> m/s',
     });
     canvas_init();
 }
