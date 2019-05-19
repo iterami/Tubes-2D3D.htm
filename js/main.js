@@ -13,7 +13,9 @@ function draw_logic(){
       canvas_properties['width-half'],
       canvas_properties['height-half']
     );
-    canvas_buffer.rotate(rotation * core_degree);
+    canvas_buffer.rotate(core_degrees_to_radians({
+      'degrees': rotation,
+    }));
 
     // Draw walls.
     let loop_counter = 3;
