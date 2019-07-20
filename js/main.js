@@ -13,7 +13,7 @@ function draw_logic(){
       canvas_properties['width-half'],
       canvas_properties['height-half']
     );
-    canvas_buffer.rotate(core_degrees_to_radians({
+    canvas_buffer.rotate(math_degrees_to_radians({
       'degrees': rotation,
     }));
 
