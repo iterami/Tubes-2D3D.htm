@@ -220,11 +220,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'enter': {
-          'onclick': function(){
-              canvas_setmode({
-                'newgame': true,
-              });
-          },
+          'onclick': core_repo_reset,
         },
       },
       'globals': {
@@ -235,6 +231,7 @@ function repo_init(){
       },
       'info': '<input id=enter type=button value="Enter the Tubes">',
       'menu': true,
+      'reset': canvas_setmode,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
     });
