@@ -1,10 +1,6 @@
 'use strict';
 
 function draw_logic(){
-    if(!colors[0]){
-        return;
-    }
-
     // Save current buffer state.
     canvas_buffer.save();
 
