@@ -157,7 +157,7 @@ function logic(){
     // Move wall split location.
     let loop_counter = 3;
     do{
-        let double = loop_counter * 2;
+        const double = loop_counter * 2;
 
         wall_splits[double] += wall_splits[double] >= 0
           ? speed
