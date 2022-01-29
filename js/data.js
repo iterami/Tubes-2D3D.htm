@@ -15,9 +15,8 @@ function load_data(id){
       2,
     ];
 
-    // Set initial tube colors.
     colors = [
-      ['#f0f', '#06f', '#ff0', '#f60'],// Initial
-      ['#0f0', '#f00', '#00f', '#0ff'],// First swap
+      ['#f0f', '#06f', '#ff0', '#f60'],
+      ['#0f0', '#f00', '#00f', '#0ff'],
     ];
 }

@@ -1,10 +1,7 @@
 'use strict';
 
 function repo_drawlogic(){
-    // Save current buffer state.
     canvas_buffer.save();
-
-    // Setup translate/rotation for wall drawing.
     canvas_buffer.translate(
       canvas_properties['width-half'],
       canvas_properties['height-half']
@@ -13,7 +10,6 @@ function repo_drawlogic(){
       'degrees': rotation,
     }));
 
-    // Draw walls.
     let loop_counter = 3;
     do{
         canvas_draw_path({
@@ -133,7 +129,6 @@ function repo_drawlogic(){
       ],
     });
 
-    // Restore buffer state.
     canvas_buffer.restore();
 }
 
@@ -154,7 +149,6 @@ function repo_logic(){
 
     let do_split = false;
 
-    // Move wall split location.
     let loop_counter = 3;
     do{
         const double = loop_counter * 2;
@@ -166,10 +160,8 @@ function repo_logic(){
           ? speed
           : -speed;
 
-        // Check if wall split reached edge of screen.
         if(wall_splits[double] < -canvas_properties['width-half']
           || wall_splits[double] > canvas_properties['width-half']){
-            // Reset wall splits.
             wall_splits[double] = [
               -2,
               -2,
