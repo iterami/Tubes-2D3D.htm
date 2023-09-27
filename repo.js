@@ -26,12 +26,12 @@ function repo_drawlogic(){
         return;
     }
 
-    canvas_buffer.save();
-    canvas_buffer.translate(
+    canvas.save();
+    canvas.translate(
       canvas_properties['width-half'],
       canvas_properties['height-half']
     );
-    canvas_buffer.rotate(math_degrees_to_radians({
+    canvas.rotate(math_degrees_to_radians({
       'degrees': rotation,
     }));
 
@@ -154,7 +154,7 @@ function repo_drawlogic(){
       ],
     });
 
-    canvas_buffer.restore();
+    canvas.restore();
 }
 
 function repo_logic(){
