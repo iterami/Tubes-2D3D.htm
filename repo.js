@@ -31,9 +31,7 @@ function repo_drawlogic(){
       canvas_properties['width-half'],
       canvas_properties['height-half']
     );
-    canvas.rotate(math_degrees_to_radians({
-      'degrees': rotation,
-    }));
+    canvas.rotate(math_degrees_to_radians(rotation));
 
     let loop_counter = 3;
     do{
