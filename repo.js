@@ -247,7 +247,7 @@ function repo_init(){
         'speed': 0,
         'wall_splits': [],
       },
-      'info': '<input id=enter type=button value="Enter the Tubes">',
+      'info': '<button id=enter type=button>Enter the Tubes</button>',
       'menu': true,
       'reset': canvas_setmode,
       'title': 'Tubes-2D3D.htm',
