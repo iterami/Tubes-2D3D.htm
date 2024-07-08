@@ -40,17 +40,21 @@ function repo_drawlogic(){
             'fillStyle': colors[0][loop_counter],
           },
           'vertices': [
-            {
-              'type': 'moveTo',
-            },
-            {
-              'x': wall_splits[[0,0,2,4,][loop_counter]],
-              'y': wall_splits[[1,1,3,5,][loop_counter]],
-            },
-            {
-              'x': wall_splits[[2,4,6,6,][loop_counter]],
-              'y': wall_splits[[3,5,7,7,][loop_counter]],
-            },
+            [
+              'moveTo',
+              0,
+              0,
+            ],
+            [
+              'lineTo',
+              wall_splits[[0,0,2,4,][loop_counter]],
+              wall_splits[[1,1,3,5,][loop_counter]],
+            ],
+            [
+              'lineTo',
+              wall_splits[[2,4,6,6,][loop_counter]],
+              wall_splits[[3,5,7,7,][loop_counter]],
+            ],
           ],
         });
     }while(loop_counter--);
@@ -60,23 +64,26 @@ function repo_drawlogic(){
         'fillStyle': colors[1][0],
       },
       'vertices': [
-        {
-          'type': 'moveTo',
-          'x': -canvas_properties['width-half'],
-          'y': -canvas_properties['width-half'],
-        },
-        {
-          'x': wall_splits[0],
-          'y': wall_splits[1],
-        },
-        {
-          'x': wall_splits[2],
-          'y': wall_splits[3],
-        },
-        {
-          'x': canvas_properties['width-half'],
-          'y': -canvas_properties['width-half'],
-        },
+        [
+          'moveTo',
+          -canvas_properties['width-half'],
+          -canvas_properties['width-half'],
+        ],
+        [
+          'lineTo',
+          wall_splits[0],
+          wall_splits[1],
+        ],
+        [
+          'lineTo',
+          wall_splits[2],
+          wall_splits[3],
+        ],
+        [
+          'lineTo',
+          canvas_properties['width-half'],
+          -canvas_properties['width-half'],
+        ],
       ],
     });
     canvas_draw_path({
@@ -84,23 +91,26 @@ function repo_drawlogic(){
         'fillStyle': colors[1][1],
       },
       'vertices': [
-        {
-          'type': 'moveTo',
-          'x': -canvas_properties['width-half'],
-          'y': -canvas_properties['width-half'],
-        },
-        {
-          'x': wall_splits[0],
-          'y': wall_splits[1],
-        },
-        {
-          'x': wall_splits[4],
-          'y': wall_splits[5],
-        },
-        {
-          'x': -canvas_properties['width-half'],
-          'y': canvas_properties['width-half'],
-        },
+        [
+          'moveTo',
+          -canvas_properties['width-half'],
+          -canvas_properties['width-half'],
+        ],
+        [
+          'lineTo',
+          wall_splits[0],
+          wall_splits[1],
+        ],
+        [
+          'lineTo',
+          wall_splits[4],
+          wall_splits[5],
+        ],
+        [
+          'lineTo',
+          -canvas_properties['width-half'],
+          canvas_properties['width-half'],
+        ],
       ],
     });
     canvas_draw_path({
@@ -108,23 +118,26 @@ function repo_drawlogic(){
         'fillStyle': colors[1][2],
       },
       'vertices': [
-        {
-          'type': 'moveTo',
-          'x': canvas_properties['width-half'],
-          'y': -canvas_properties['width-half'],
-        },
-        {
-          'x': wall_splits[2],
-          'y': wall_splits[3],
-        },
-        {
-          'x': wall_splits[6],
-          'y': wall_splits[7],
-        },
-        {
-          'x': canvas_properties['width-half'],
-          'y': canvas_properties['width-half'],
-        },
+        [
+          'moveTo',
+          canvas_properties['width-half'],
+          -canvas_properties['width-half'],
+        ],
+        [
+          'lineTo',
+          wall_splits[2],
+          wall_splits[3],
+        ],
+        [
+          'lineTo',
+          wall_splits[6],
+          wall_splits[7],
+        ],
+        [
+          'lineTo',
+          canvas_properties['width-half'],
+          canvas_properties['width-half'],
+        ],
       ],
     });
     canvas_draw_path({
@@ -132,23 +145,26 @@ function repo_drawlogic(){
         'fillStyle': colors[1][3],
       },
       'vertices': [
-        {
-          'type': 'moveTo',
-          'x': -canvas_properties['width-half'],
-          'y': canvas_properties['width-half'],
-        },
-        {
-          'x': wall_splits[4],
-          'y': wall_splits[5],
-        },
-        {
-          'x': wall_splits[6],
-          'y': wall_splits[7],
-        },
-        {
-          'x': canvas_properties['width-half'],
-          'y': canvas_properties['width-half'],
-        },
+        [
+          'moveTo',
+          -canvas_properties['width-half'],
+          canvas_properties['width-half'],
+        ],
+        [
+          'lineTo',
+          wall_splits[4],
+          wall_splits[5],
+        ],
+        [
+          'lineTo',
+          wall_splits[6],
+          wall_splits[7],
+        ],
+        [
+          'lineTo',
+          canvas_properties['width-half'],
+          canvas_properties['width-half'],
+        ],
       ],
     });
 
