@@ -59,6 +59,10 @@ function repo_drawlogic(){
         });
     }while(loop_counter--);
 
+    const half = Math.max(
+      canvas_properties['width-half'],
+      canvas_properties['height-half']
+    );
     canvas_draw_path({
       'properties': {
         'fillStyle': colors[1][0],
@@ -66,8 +70,8 @@ function repo_drawlogic(){
       'vertices': [
         [
           'moveTo',
-          -canvas_properties['width-half'],
-          -canvas_properties['width-half'],
+          -half,
+          -half,
         ],
         [
           'lineTo',
@@ -81,8 +85,8 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          canvas_properties['width-half'],
-          -canvas_properties['width-half'],
+          half,
+          -half,
         ],
       ],
     });
@@ -93,8 +97,8 @@ function repo_drawlogic(){
       'vertices': [
         [
           'moveTo',
-          -canvas_properties['width-half'],
-          -canvas_properties['width-half'],
+          -half,
+          -half,
         ],
         [
           'lineTo',
@@ -108,8 +112,8 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          -canvas_properties['width-half'],
-          canvas_properties['width-half'],
+          -half,
+          half,
         ],
       ],
     });
@@ -120,8 +124,8 @@ function repo_drawlogic(){
       'vertices': [
         [
           'moveTo',
-          canvas_properties['width-half'],
-          -canvas_properties['width-half'],
+          half,
+          -half,
         ],
         [
           'lineTo',
@@ -135,8 +139,8 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          canvas_properties['width-half'],
-          canvas_properties['width-half'],
+          half,
+          half,
         ],
       ],
     });
@@ -147,8 +151,8 @@ function repo_drawlogic(){
       'vertices': [
         [
           'moveTo',
-          -canvas_properties['width-half'],
-          canvas_properties['width-half'],
+          -half,
+          half,
         ],
         [
           'lineTo',
@@ -162,8 +166,8 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          canvas_properties['width-half'],
-          canvas_properties['width-half'],
+          half,
+          half,
         ],
       ],
     });
@@ -187,6 +191,10 @@ function repo_logic(){
     }
 
     let do_split = false;
+    const half = Math.max(
+      canvas_properties['width-half'],
+      canvas_properties['height-half']
+    );
 
     let loop_counter = 3;
     do{
@@ -199,8 +207,8 @@ function repo_logic(){
           ? speed
           : -speed;
 
-        if(wall_splits[double] < -canvas_properties['width-half']
-          || wall_splits[double] > canvas_properties['width-half']){
+        if(wall_splits[double] < -half
+          || wall_splits[double] > half){
             wall_splits[double] = [
               -2,
               -2,
