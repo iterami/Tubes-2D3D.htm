@@ -254,7 +254,7 @@ function repo_logic(){
 function repo_escape(){
     if(wall_splits.length === 0
       && !core_menu_open){
-        core_repo_reset();
+        canvas_setmode();
     }
 }
 
@@ -262,7 +262,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'enter': {
-          'onclick': core_repo_reset,
+          'onclick': canvas_setmode,
         },
       },
       'globals': {
@@ -273,7 +273,7 @@ function repo_init(){
       },
       'info': '<button id=enter type=button>Enter the Tubes</button>',
       'menu': true,
-      'reset': canvas_setmode,
+      'storage-controls': true,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
     });
