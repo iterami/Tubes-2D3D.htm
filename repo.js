@@ -176,17 +176,64 @@ function repo_drawlogic(){
 }
 
 function repo_logic(){
-    if(core_keys[core_storage_data['move-←']]['state']){
+    let move_left = false;
+    let move_right = false;
+    let speed_down = false;
+    let speed_up = false;
+    if(core_mobile){
+        if(core_mouse['down-0']){
+            const x = core_mouse['x'] / globalThis.innerWidth;
+            const y = core_mouse['y'] / globalThis.innerHeight;
+            if(x < .5){
+                 if(y < x){
+                     speed_up = true;
+
+                 }else if(y > 1 - x){
+                     speed_down = true;
+
+                 }else{
+                     move_left = true;
+                 }
+
+            }else if(x < y){
+                 speed_down = true;
+
+            }else if(x < 1 - y){
+                 speed_up = true;
+
+            }else{
+                 move_right = true;
+            }
+        }
+
+    }else{
+        if(core_keys[core_storage_data['move-←']]['state']){
+            move_left = true;
+        }
+        if(core_keys[core_storage_data['move-→']]['state']){
+            move_right = true;
+        }
+        if(core_keys[core_storage_data['move-↓']]['state']){
+            speed_down = true;
+        }
+        if(core_keys[core_storage_data['move-↑']]['state']){
+            speed_up = true;
+        }
+    }
+
+    if(move_left){
         rotation -= speed / 10 + 1;
     }
-    if(core_keys[core_storage_data['move-→']]['state']){
+    if(move_right){
         rotation += speed / 10 + 1;
     }
-    if(core_keys[core_storage_data['move-↓']]['state']
-      && speed > 0){
-        speed -= 1;
+    if(speed_down){
+        speed = Math.max(
+          --speed,
+          0
+        );
     }
-    if(core_keys[core_storage_data['move-↑']]['state']){
+    if(speed_up){
         speed += 1;
     }
 
@@ -273,6 +320,9 @@ function repo_init(){
       },
       'info': '<button id=enter type=button>Enter the Tubes</button>',
       'menu': true,
+      'mousebinds': core_mobile
+        ? {}
+        : void 0,
       'storage-controls': true,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
