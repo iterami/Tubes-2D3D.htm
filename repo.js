@@ -176,48 +176,32 @@ function repo_drawlogic(){
 }
 
 function repo_logic(){
-    let move_left = false;
-    let move_right = false;
-    let speed_down = false;
-    let speed_up = false;
-    if(core_mobile){
-        if(core_pointer['down-0']){
-            const x = core_pointer['x'] / globalThis.innerWidth;
-            const y = core_pointer['y'] / globalThis.innerHeight;
-            if(x < .5){
-                 if(y < x){
-                     speed_up = true;
-
-                 }else if(y > 1 - x){
-                     speed_down = true;
-
-                 }else{
-                     move_left = true;
-                 }
-
-            }else if(x < y){
-                 speed_down = true;
-
-            }else if(x < 1 - y){
+    let move_left = core_keys[core_storage_data['move-←']]['state'];
+    let move_right = core_keys[core_storage_data['move-→']]['state'];
+    let speed_down = core_keys[core_storage_data['move-↓']]['state'];
+    let speed_up = core_keys[core_storage_data['move-↑']]['state'];
+    if(core_pointer['down-0']){
+        const x = core_pointer['x'] / globalThis.innerWidth;
+        const y = core_pointer['y'] / globalThis.innerHeight;
+        if(x < .5){
+             if(y < x){
                  speed_up = true;
 
-            }else{
-                 move_right = true;
-            }
-        }
+             }else if(y > 1 - x){
+                 speed_down = true;
 
-    }else{
-        if(core_keys[core_storage_data['move-←']]['state']){
-            move_left = true;
-        }
-        if(core_keys[core_storage_data['move-→']]['state']){
-            move_right = true;
-        }
-        if(core_keys[core_storage_data['move-↓']]['state']){
-            speed_down = true;
-        }
-        if(core_keys[core_storage_data['move-↑']]['state']){
-            speed_up = true;
+             }else{
+                 move_left = true;
+             }
+
+        }else if(x < y){
+             speed_down = true;
+
+        }else if(x < 1 - y){
+             speed_up = true;
+
+        }else{
+             move_right = true;
         }
     }
 
@@ -320,9 +304,7 @@ function repo_init(){
       },
       'info': '<button id=enter type=button>Enter the Tubes</button>',
       'menu': true,
-      'pointerbinds': core_mobile
-        ? {}
-        : void 0,
+      'pointerbinds': {},
       'storage-controls': true,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
