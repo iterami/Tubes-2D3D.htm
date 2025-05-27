@@ -202,7 +202,9 @@ function repo_init(){
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
     });
-    canvas_init();
+    canvas_init({
+      'cursor': 'pointer',
+    });
 }
 
 function repo_logic(){
