@@ -175,6 +175,36 @@ function repo_drawlogic(){
     canvas.restore();
 }
 
+function repo_escape(){
+    if(wall_splits.length === 0
+      && !core_menu_open){
+        canvas_setmode();
+    }
+}
+
+function repo_init(){
+    core_repo_init({
+      'events': {
+        'enter': {
+          'onclick': canvas_setmode,
+        },
+      },
+      'globals': {
+        'colors': [],
+        'rotation': 0,
+        'speed': 0,
+        'wall_splits': [],
+      },
+      'info': '<button id=enter type=button>Enter the Tubes</button>',
+      'menu': true,
+      'pointerbinds': {},
+      'storage-controls': true,
+      'title': 'Tubes-2D3D.htm',
+      'ui': '<span id=speed></span> m/s',
+    });
+    canvas_init();
+}
+
 function repo_logic(){
     let move_left = core_keys[core_storage_data['move-←']]['state'];
     let move_right = core_keys[core_storage_data['move-→']]['state'];
@@ -280,34 +310,4 @@ function repo_logic(){
         'speed': speed,
       },
     });
-}
-
-function repo_escape(){
-    if(wall_splits.length === 0
-      && !core_menu_open){
-        canvas_setmode();
-    }
-}
-
-function repo_init(){
-    core_repo_init({
-      'events': {
-        'enter': {
-          'onclick': canvas_setmode,
-        },
-      },
-      'globals': {
-        'colors': [],
-        'rotation': 0,
-        'speed': 0,
-        'wall_splits': [],
-      },
-      'info': '<button id=enter type=button>Enter the Tubes</button>',
-      'menu': true,
-      'pointerbinds': {},
-      'storage-controls': true,
-      'title': 'Tubes-2D3D.htm',
-      'ui': '<span id=speed></span> m/s',
-    });
-    canvas_init();
 }
