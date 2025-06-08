@@ -216,24 +216,24 @@ function repo_logic(){
         const x = core_pointer['x'] / globalThis.innerWidth;
         const y = core_pointer['y'] / globalThis.innerHeight;
         if(x < .5){
-             if(y < x){
-                 speed_up = true;
+            if(y < x){
+                speed_up = true;
 
-             }else if(y > 1 - x){
-                 speed_down = true;
+            }else if(y > 1 - x){
+                speed_down = true;
 
-             }else{
-                 move_left = true;
-             }
+            }else{
+                move_left = true;
+            }
 
         }else if(x < y){
-             speed_down = true;
+            speed_down = true;
 
         }else if(x < 1 - y){
-             speed_up = true;
+            speed_up = true;
 
         }else{
-             move_right = true;
+            move_right = true;
         }
     }
 
