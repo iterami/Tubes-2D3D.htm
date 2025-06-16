@@ -28,8 +28,8 @@ function repo_drawlogic(){
 
     canvas.save();
     canvas.translate(
-      canvas_properties['width-half'],
-      canvas_properties['height-half']
+      canvas_properties.width_half,
+      canvas_properties.height_half
     );
     canvas.rotate(math_degrees_to_radians(rotation));
 
@@ -60,8 +60,8 @@ function repo_drawlogic(){
     }while(loop_counter--);
 
     const half = Math.max(
-      canvas_properties['width-half'],
-      canvas_properties['height-half']
+      canvas_properties.width_half,
+      canvas_properties.height_half
     );
     canvas_draw_path({
       'properties': {
@@ -208,13 +208,13 @@ function repo_init(){
 }
 
 function repo_logic(){
-    let move_left = core_keys[core_storage_data['move-←']]['state'];
-    let move_right = core_keys[core_storage_data['move-→']]['state'];
-    let speed_down = core_keys[core_storage_data['move-↓']]['state'];
-    let speed_up = core_keys[core_storage_data['move-↑']]['state'];
+    let move_left = core_keys[core_storage_data['move-←']].state;
+    let move_right = core_keys[core_storage_data['move-→']].state;
+    let speed_down = core_keys[core_storage_data['move-↓']].state;
+    let speed_up = core_keys[core_storage_data['move-↑']].state;
     if(core_pointer['down-0']){
-        const x = core_pointer['x'] / globalThis.innerWidth;
-        const y = core_pointer['y'] / globalThis.innerHeight;
+        const x = core_pointer.x / globalThis.innerWidth;
+        const y = core_pointer.y / globalThis.innerHeight;
         if(x < .5){
             if(y < x){
                 speed_up = true;
@@ -255,8 +255,8 @@ function repo_logic(){
 
     let do_split = false;
     const half = Math.max(
-      canvas_properties['width-half'],
-      canvas_properties['height-half']
+      canvas_properties.width_half,
+      canvas_properties.height_half
     );
 
     let loop_counter = 3;
