@@ -198,7 +198,7 @@ function repo_init(){
       'info': '<button id=enter type=button>Enter the Tubes</button>',
       'menu': true,
       'pointerbinds': {},
-      'storage-controls': true,
+      'storage_controls': true,
       'title': 'Tubes-2D3D.htm',
       'ui': '<span id=speed></span> m/s',
     });
