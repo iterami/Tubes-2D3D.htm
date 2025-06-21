@@ -212,7 +212,7 @@ function repo_logic(){
     let move_right = core_keys[core_storage_data['move-→']].state;
     let speed_down = core_keys[core_storage_data['move-↓']].state;
     let speed_up = core_keys[core_storage_data['move-↑']].state;
-    if(core_pointer['down-0']){
+    if(core_pointer.down_0){
         const x = core_pointer.x / globalThis.innerWidth;
         const y = core_pointer.y / globalThis.innerHeight;
         if(x < .5){
