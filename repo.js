@@ -238,10 +238,10 @@ function repo_logic(){
     }
 
     if(move_left){
-        rotation -= speed / 10 + 1;
+        rotation -= speed / 25 + 1;
     }
     if(move_right){
-        rotation += speed / 10 + 1;
+        rotation += speed / 25 + 1;
     }
     if(speed_down){
         speed = Math.max(
