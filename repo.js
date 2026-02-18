@@ -174,7 +174,7 @@ function repo_init(){
         'speed': 0,
         'wall_splits': [],
       },
-      'info': '<button id=enter type=button>Enter the Tubes</button>',
+      'info': '<button class=medium id=enter type=button>Enter the Tubes</button>',
       'menu': true,
       'pointerbinds': {},
       'storage_controls': true,
