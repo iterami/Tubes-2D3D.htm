@@ -12,11 +12,10 @@ function repo_drawlogic(){
     );
     canvas.rotate(math_degrees_to_radians(rotation));
 
-    let loop_counter = 3;
-    do{
+    for(let i = 0; i < 4; i++){
         canvas_draw_path({
           'properties': {
-            'fillStyle': colors[0][loop_counter],
+            'fillStyle': colors[0][i],
           },
           'vertices': [
             [
@@ -26,17 +25,17 @@ function repo_drawlogic(){
             ],
             [
               'lineTo',
-              wall_splits[[0,0,2,4,][loop_counter]],
-              wall_splits[[1,1,3,5,][loop_counter]],
+              wall_splits[[0,0,2,4,][i]],
+              wall_splits[[1,1,3,5,][i]],
             ],
             [
               'lineTo',
-              wall_splits[[2,4,6,6,][loop_counter]],
-              wall_splits[[3,5,7,7,][loop_counter]],
+              wall_splits[[2,4,6,6,][i]],
+              wall_splits[[3,5,7,7,][i]],
             ],
           ],
         });
-    }while(loop_counter--);
+    }
 
     const half = Math.max(
       canvas_properties.width_half,
@@ -259,9 +258,8 @@ function repo_logic(){
       canvas_properties.height_half
     );
 
-    let loop_counter = 3;
-    do{
-        const double = loop_counter * 2;
+    for(let i = 0; i < 4; i++){
+        const double = i * 2;
 
         wall_splits[double] += wall_splits[double] >= 0
           ? speed
@@ -295,7 +293,7 @@ function repo_logic(){
 
             do_split = true;
         }
-    }while(loop_counter--);
+    }
 
     if(do_split){
         colors[1] = colors[0];
