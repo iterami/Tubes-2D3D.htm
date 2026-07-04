@@ -178,7 +178,7 @@ function repo_init(){
       'pointerbinds': {},
       'storage_controls': true,
       'title': 'Tubes-2D3D.htm',
-      'ui': '<span id=speed></span> m/s',
+      'ui': ' <span id=speed>0</span> m/s',
     });
     canvas_init({
       'cursor': 'pointer',
