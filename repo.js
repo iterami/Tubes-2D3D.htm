@@ -1,7 +1,7 @@
 'use strict';
 
 function repo_drawlogic(){
-    if(!colors[0]){
+    if(colors.length === 0){
         return;
     }
 
@@ -154,7 +154,7 @@ function repo_drawlogic(){
 }
 
 function repo_escape(){
-    if(wall_splits.length === 0
+    if(colors.length === 0
       && !core_menu_open){
         canvas_setmode();
     }
@@ -190,14 +190,10 @@ function repo_load(id){
     rotation = 0;
 
     wall_splits = [
-      -2,
-      -2,
-      2,
-      -2,
-      -2,
-      2,
-      2,
-      2,
+      -2, -2,
+      2, -2,
+      -2, 2,
+      2, 2,
     ];
 
     colors = [
@@ -252,12 +248,11 @@ function repo_logic(){
         speed += 1;
     }
 
-    let do_split = false;
+    let colors = false;
     const half = Math.max(
       canvas_properties.width_half,
       canvas_properties.height_half
     );
-
     for(let i = 0; i < 4; i++){
         const double = i * 2;
 
@@ -271,31 +266,22 @@ function repo_logic(){
         if(wall_splits[double] < -half
           || wall_splits[double] > half){
             wall_splits[double] = [
-              -2,
-              -2,
-              2,
-              -2,
-              -2,
-              2,
-              2,
-              2,
+              -2, -2,
+              2, -2,
+              -2, 2,
+              2, 2,
             ][double];
             wall_splits[double + 1] = [
-              -2,
-              -2,
-              2,
-              -2,
-              -2,
-              2,
-              2,
-              2,
+              -2, -2,
+              2, -2,
+              -2, 2,
+              2, 2,
             ][double + 1];
 
-            do_split = true;
+            colors = true;
         }
     }
-
-    if(do_split){
+    if(colors){
         colors[1] = colors[0];
         colors[0] = [
           '#' + core_random_hex(),
