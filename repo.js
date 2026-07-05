@@ -1,7 +1,7 @@
 'use strict';
 
 function repo_drawlogic(){
-    if(colors.length === 0){
+    if(!colors.length){
         return;
     }
 
@@ -25,13 +25,13 @@ function repo_drawlogic(){
             ],
             [
               'lineTo',
-              wall_splits[[0,0,2,4,][i]],
-              wall_splits[[1,1,3,5,][i]],
+              walls[[0,0,2,4,][i]],
+              walls[[1,1,3,5,][i]],
             ],
             [
               'lineTo',
-              wall_splits[[2,4,6,6,][i]],
-              wall_splits[[3,5,7,7,][i]],
+              walls[[2,4,6,6,][i]],
+              walls[[3,5,7,7,][i]],
             ],
           ],
         });
@@ -53,13 +53,13 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          wall_splits[0],
-          wall_splits[1],
+          walls[0],
+          walls[1],
         ],
         [
           'lineTo',
-          wall_splits[2],
-          wall_splits[3],
+          walls[2],
+          walls[3],
         ],
         [
           'lineTo',
@@ -80,13 +80,13 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          wall_splits[0],
-          wall_splits[1],
+          walls[0],
+          walls[1],
         ],
         [
           'lineTo',
-          wall_splits[4],
-          wall_splits[5],
+          walls[4],
+          walls[5],
         ],
         [
           'lineTo',
@@ -107,13 +107,13 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          wall_splits[2],
-          wall_splits[3],
+          walls[2],
+          walls[3],
         ],
         [
           'lineTo',
-          wall_splits[6],
-          wall_splits[7],
+          walls[6],
+          walls[7],
         ],
         [
           'lineTo',
@@ -134,13 +134,13 @@ function repo_drawlogic(){
         ],
         [
           'lineTo',
-          wall_splits[4],
-          wall_splits[5],
+          walls[4],
+          walls[5],
         ],
         [
           'lineTo',
-          wall_splits[6],
-          wall_splits[7],
+          walls[6],
+          walls[7],
         ],
         [
           'lineTo',
@@ -154,7 +154,7 @@ function repo_drawlogic(){
 }
 
 function repo_escape(){
-    if(colors.length === 0
+    if(!colors.length
       && !core_menu_open){
         canvas_setmode();
     }
@@ -171,7 +171,7 @@ function repo_init(){
         'colors': [],
         'rotation': 0,
         'speed': 0,
-        'wall_splits': [],
+        'walls': [],
       },
       'info': '<button class=medium id=enter type=button>Enter the Tubes</button>',
       'menu': true,
@@ -189,11 +189,9 @@ function repo_load(id){
     speed = 10;
     rotation = 0;
 
-    wall_splits = [
-      -2, -2,
-      2, -2,
-      -2, 2,
-      2, 2,
+    walls = [
+      -2, -2, 2, -2,
+      -2, 2, 2, 2,
     ];
 
     colors = [
@@ -248,7 +246,7 @@ function repo_logic(){
         speed += 1;
     }
 
-    let colors = false;
+    let switched = false;
     const half = Math.max(
       canvas_properties.width_half,
       canvas_properties.height_half
@@ -256,32 +254,28 @@ function repo_logic(){
     for(let i = 0; i < 4; i++){
         const double = i * 2;
 
-        wall_splits[double] += wall_splits[double] >= 0
+        walls[double] += walls[double] >= 0
           ? speed
           : -speed;
-        wall_splits[double + 1] += wall_splits[double + 1] >= 0
+        walls[double + 1] += walls[double + 1] >= 0
           ? speed
           : -speed;
 
-        if(wall_splits[double] < -half
-          || wall_splits[double] > half){
-            wall_splits[double] = [
-              -2, -2,
-              2, -2,
-              -2, 2,
-              2, 2,
+        if(walls[double] < -half
+          || walls[double] > half){
+            walls[double] = [
+              -2, -2, 2, -2,
+              -2, 2, 2, 2,
             ][double];
-            wall_splits[double + 1] = [
-              -2, -2,
-              2, -2,
-              -2, 2,
-              2, 2,
+            walls[double + 1] = [
+              -2, -2, 2, -2,
+              -2, 2, 2, 2,
             ][double + 1];
 
-            colors = true;
+            switched = true;
         }
     }
-    if(colors){
+    if(switched){
         colors[1] = colors[0];
         colors[0] = [
           '#' + core_random_hex(),
