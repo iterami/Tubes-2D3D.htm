@@ -25,13 +25,13 @@ function repo_drawlogic(){
             ],
             [
               'lineTo',
-              walls[[0,0,2,4,][i]],
-              walls[[1,1,3,5,][i]],
+              walls[[0, 0, 2, 4][i]],
+              walls[[1, 1, 3, 5][i]],
             ],
             [
               'lineTo',
-              walls[[2,4,6,6,][i]],
-              walls[[3,5,7,7,][i]],
+              walls[[2, 4, 6, 6][i]],
+              walls[[3, 5, 7, 7][i]],
             ],
           ],
         });
